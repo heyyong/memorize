@@ -8,6 +8,8 @@ import { Vocabulary } from './Vocabulary';
 
 export { IVocabulary } from './Vocabulary';
 
+export const VocAddr = __dirname;
+
 let schema: Schema | null = null;
 try {
     const schemaAddr = __dirname + '/schema.yaml'
@@ -49,7 +51,7 @@ export async function getVocabularies(collAddr: string): Promise<Vocabulary[]> {
         const collName = basename(collAddr)
         const dirents = await promises.readdir(collAddr, { withFileTypes: true });
 
-        const files = dirents.filter(dir => dir.isFile() && dir.name.endsWith('yaml'));
+        const files = dirents.filter(dir => dir.isFile() && dir.name.endsWith('.yaml'));
 
         const vocSets: Vocabulary[] = [];
         for (const file of files) {
@@ -72,7 +74,7 @@ export async function getVocabularies(collAddr: string): Promise<Vocabulary[]> {
 
         return vocSets
     } catch (err) {
-        console.error('validate error');
+        console.error('validate error: ', err);
         process.exit(1);
     }
 }

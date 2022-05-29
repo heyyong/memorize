@@ -2,10 +2,12 @@ import { program } from 'commander';
 import { format } from 'date-fns';
 import mdpdf from 'markdown-pdf';
 import { promises } from 'fs';
-import { genMarkdown } from './file';
+import { join } from 'path';
 
+import { genMarkdown } from './file';
 import pkg from './package.json';
-import { getVocabularies, getVocClassification, IVocabulary } from './vocabularies';
+import { getVocabularies, getVocClassification, IVocabulary, VocAddr } from './vocabularies';
+import { stringify } from 'yaml';
 
 const CACHE_ADDR = __dirname + '/.cache';
 const ADDR = process.cwd();
@@ -47,6 +49,35 @@ program
                     }
                 }
                 console.log(`Load ${options.from} success. total ${result.length}`);
+            }
+
+            // write back
+            {
+                const writeBack: Record<string, IVocabulary[]> = {}
+                for (const voc of vocList) {
+                    const addr = join(voc.cla, voc.volSet);
+
+                    if (!(addr in writeBack)) {
+                        writeBack[addr] = [];
+                    }
+
+                    writeBack[addr].push(voc)
+                }
+
+                await Promise.all(Object.keys(writeBack).map(addr => {
+                    const vocSet = writeBack[addr]!;
+
+                    const file: any = {};
+                    for (let voc of vocSet) {
+                        const [spell, json] = voc.toJSON()
+                        file[spell] = json;
+                    }
+
+                    const str = stringify(file)
+
+                    return promises.writeFile(join(VocAddr, addr), str)
+                }));
+                console.log('update source success!');
             }
 
             let cache: string = '';

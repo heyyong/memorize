@@ -1,6 +1,6 @@
-type: object
 allOf: 
   -
+    required: [ contents ]
     properties:
       _updated:
         type: number
@@ -29,5 +29,4 @@ allOf:
                   type: string
                 plural:
                   type: string
-    required: [ contents ]
-    additionalProperties: false
+    # additionalProperties: true

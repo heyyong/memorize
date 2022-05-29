@@ -12,6 +12,8 @@ export class Vocabulary {
     public updated: number;
     public properties: PropertySet[];
 
+    public r: Record<string, any>;
+
     private _updated: boolean = false;
 
     constructor(cla: string, volSet: string, voc: string, prop: any) {
@@ -53,6 +55,11 @@ export class Vocabulary {
             const propertySet = new PropertySet(p, prop.contents[p])
             this.properties.push(propertySet);
         }
+
+        this.r = {};
+        if (prop.r) {
+            this.r = prop.r;
+        }
     }
 
     public toJSON(): [voc: string, obj: any] {
@@ -60,6 +67,7 @@ export class Vocabulary {
 
         const obj = {
             contents: {} as any,
+            r: _this.r,
             _id: _this.id,
             _created: _this.created,
             _updated: _this._updated ? new Date().getTime() : _this.updated,
