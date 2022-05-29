@@ -1,0 +1,395 @@
+# 知米 - 已学单词 - 无需再学
+craft:
+  contents:
+    n:
+      list:
+      - meaning: a job or activity in which you make things with your hands, and that you usually need skill to do
+        example: traditional rural crafts
+        plural: crafts
+      - meaning: a) a small boat b) an aircraft or spacecraft
+        example: ""
+        plural: craft
+      - meaning: the skills needed for a particular profession
+        example: The musician spends years perfecting his craft
+      - meaning: the skills needed for a particular profession
+        example: The musician spends years perfecting his craft
+      - meaning: skill in deceiving people
+        example: Craft and cunning were necessary for the scheme to work
+
+ability:
+  contents:
+    n:
+      list:
+      - meaning: the state of being able to do something
+        example: the ability to walk
+        plural: abilities
+      - meaning: someone's level of skill at doing something
+        example: The test measures your mathematical ability.
+        plural: ''
+      grammar: Ability is followed by an infinitive with 'to', not by an -ing form
+
+afford:
+  contents:
+    vt:
+      tense: [afforded afforded affording]
+      list:
+      - meaning: to provide something or allow something to happen
+        example: The room affords a beautiful view over the city
+
+attention:
+  contents:
+    n:
+      list:
+      - meaning: when you carefully listen to, look at, or think about someone or something
+        example: My attention wasn't really on the game
+        plural: ''
+      - meaning: the interest that people show in someone or something
+        example: She was flattered by all the attention he was giving her
+        plural: ''
+      - meaning: notice
+        example: She waved to attract the attention of the waitress
+        plural: ''
+      - meaning: something you do to repair or clean something
+        example: The bike's in fairly good condition, but the gears need a bit of attention
+        plural: '',
+      - meaning: things that you do to help or to take care of someone or something
+        example: Pets need a lot of care and attention
+        plural: ''
+
+normal:
+  contents:
+    adj:
+      list:
+      - meaning: usual, typical, or expected
+        example: A normal working week is 40 hours
+      - meaning: someone who is normal is mentally and physically healthy
+        example: He seems a perfectly normal little boy.
+
+
+service:
+  contents:
+    n:
+      list:
+      - meaning: the official system for providing something, especially something that everyone in a country needs to have, or the official organization that provides it
+        example: the health service
+        plural: services
+      - meaning: a particular type of help or work that is provided by a business to customers, but not one that involves producing goods
+        example: A wide range of financial service are available
+        plural: services
+      - meaning: the help that people who work in a shop, restaurant, bar etc give you
+        example: The service was terrible and so was the food
+        plural: ''
+      - meaning: work
+        example: Brian retired after 25 years of service to the company
+        plural: ''
+      - meaning: used to talk about whether a piece of equipment, a vehicle etc is available to be used, or how long it can be used
+        example: These trains have been in service for many years
+        plural: ''
+      - meaning: a formal religious ceremony, especially in church
+        example: The service was held in chapel
+        plural: services
+      - meaning: help that you give to someone
+        example: My secretary is at your service
+        plural: ''
+      - meaning: an examination and repair of a machine or car to keep it working properly
+        example: I'm getting the bus home - my car's in for a service
+        plural: services
+      - meaning: an act of hitting a ball through the air in order to start a game, especially in tennis
+        example: It's your service
+        plural: services
+      - meaning: a set of plates, bowls, cups etc that match each other
+        example: ''
+        plural: services
+      - meaning: a regular journey made by a bus, train, boat etc to a particular place at a particular time
+        example: the 8:15 service to Cambridge
+        plural: 'countable usually singular'
+      - meaning: when someone is given a legal document telling them that they must do something or that something is going to happen
+        example: the service of a summons
+        plural: ''
+
+suggest:
+  contents:
+    vt:
+      tense: [suggested suggested suggesting]
+      list: 
+      - meaning: to tell someone your ideas about what they should do, where they should go etc
+        example: The zoo asked its visitors to suggest a name for the new baby panda
+      - meaning: to make someone think that a particular thing is true[indicator]
+        example: Trends in spending and investment suggest a gradual economic recovery
+      - meaning: to tell someone about someone or something that is suitable for a particular job or activity[recommend]
+        example: John Roberts has been suggested for the post of manager
+      - meaning: to state something in an indirect way[imply]
+        example: Are you suggesting my husband's been drinking?
+      - meaning: to remind someone of something or help them to imagine it
+        example: The stage was bare, with only the lighting to suggest a prison
+
+# 熟词
+prerequisite:
+  contents:
+    n:
+      list:
+      - meaning: something that is necessary before something else can happen or be done
+        example: A reasonable proficiency in English is prerequisite for the course
+        plural: prerequisites
+
+cereal:
+  contents:
+    n:
+      list:
+      - meaning: a breakfast food made from grain and usually eaten with milk
+        example: a bowl of breakfast cereal
+        plural: cereal
+      - meaning: a plant grown to produce grain, for example wheat, rice etc
+        example: cereal crops
+        plural: cereals
+
+latent:
+  contents:
+    adj:
+      list:
+      - meaning: something that is latent is present but hidden, and may develop or become more noticeable in the future
+        example: The virus remains latent in the body for many years
+
+crystallize:
+  contents:
+    vt:
+      list:
+      - meaning: if a liquid crystallizes, it forms crystals
+        example: The liquid will crystallize at 50 degrees centigrade
+      - meaning: if an ideal, plan etc crystallizes or is crystallized, it becomes very clear in your mind
+        example: Inside her a thought was crystallizing
+
+continual:
+  r:
+    adv: continually
+    thesaurus: [continual, continuous, constant, uninterrupted non-stop on-going solid]
+  contents:
+    adj:
+      list:
+      - meaning: continuing for a long time without stopping
+        example: five weeks of continual rain
+      - meaning: repeated many times, often in a way that is harmful or annoying
+        example: She has endured house arrest and continual harassment by the police
+
+fragrance:
+  contents:
+    n:
+      list:
+      - meaning: a pleasant smell
+        example: the rich fragrance of a garden flower
+      - meaning: a liquid that you put on your body to make it smell pleasant
+        example: ''
+
+evacuate:
+  r:
+    n: evacuation
+  contents:
+    vt:
+      tense: [evacuated evacuated evacuating]
+      list:
+      - meaning: to send people away from a dangerous place to a safe place
+        example: Several families were evacuated from their homes
+      - meaning: to empty a place by making all the people leave
+        example: Police evacuated the area
+      - meaning: to empty your bowels
+        example: ''
+
+irrational:
+  contents:
+    adj:
+      list:
+      - meaning: not based on clear thought or reason
+        example: an irrational fear of flying
+
+succession:
+  contents:
+    n:
+      list:
+      - meaning: in succession
+        example: ''
+      - meaning: a succession of something
+        example: ''
+      - meaning: the act of taking over an official job or position, or the right to be the next to take it
+        example: 'If the prince dies, the succession passes to his son'
+
+stimulus:
+  contents:
+    n:
+      list:
+      - meaning: something that helps a process to develop more quickly or more strongly
+        example: Tax cuts provided the stimulus which the slow economy need
+        plural: ''
+      - meaning: something that makes someone or something move or react
+        example: at this age, the infant begins to react more to visual stimuli
+
+semantic:
+  r:
+    adv: semantically
+  contents:
+    adj:
+      list:
+      - meaning: relating to the meanings of words
+        example: ''
+
+agile:
+  contents:
+    adj:
+      list:
+      - meaning: able to move quickly and easily
+        example: Dogs are surprisingly agile
+      - meaning: someone who has an agile mind is able to think very quickly and intelligently
+        example: He was physically strong and mentally agile
+
+revival:
+  contents:
+    n:
+      list:
+      - meaning: a process in which something becomes active or strong again
+        example: The US and the UK have expectations of economic revival
+        plural: ''
+      - meaning: when something becomes popular again
+        example: the recent revival in medieval music
+        plural: ''
+      - meaning: a new production of play that has not been performed for a long time
+        example: Neeson was excellent in a revival of Eugene O'Neill's 'Anna Christie'
+
+fulfillment:
+  contents:
+    n:
+      list:
+      - meaning: the feeling of being happy and satisfied with your life because you are doing interesting, useful, or important things
+        example: Are you looking for greater fulfillment and satisfaction in your work?
+        plural: ''
+      - meaning: when something you wanted happens or is given to you
+        example: the fulfillment of a long-held dream
+      - meaning: the act of doing something that you promised or agreed to do
+        example: People are wondering if they will ever see the fulfillment of the government's campaign pledges
+        plural: ''
+
+appraisal:
+  contents:
+    n:
+      list:
+      - meaning: a statement or opinion judging the worth, value, or condition of something
+        example: It needed a calmer appraisal of her situation
+        plural: ''
+      - meaning: a meeting between a manager and a worker to discuss the quality of someone's work and how well they do their job
+        example: ''
+        plural: ''
+
+retailer:
+  contents:
+    n:
+      list:
+        - meaning: a person or business that sells goods to customers in a shop
+          example: ''
+          plural: ''
+
+marginally:
+  contents:
+    adv:
+      list:
+      - meaning: not enough to make an important difference
+        example: Gina's grades have improved marginally since last term.
+
+disillusion:
+  contents:
+    vt:
+      tense: [disillusioned disillusioned disillusioning]
+      list:
+      - meaning: to make someone realize that something which they thought was true or good is really true or good
+        example: I hate to disillusion you, but I don't think she's coming back.
+
+calibrate:
+  contents:
+    vt:
+      tense: [calibrated calibrated calibrating]
+      list:
+      - meaning: to check or slightly change an instrument or tool, so that it does something correctly
+        example: ''
+      - meaning: to mark an instrument or tool so that you can use it for measuring
+        example: ''
+
+beforehand:
+  contents:
+    adv:
+      list:
+      - meaning: before something else happens or is done
+        example: The police need to be briefed beforehand on how to deal with this sort of situation
+
+keystone:
+  contents:
+    n:
+      list:
+      - meaning: the large central stone in an arch that keeps the other stones in position
+        example: ''
+      - meaning: the most important part of an idea, belief, or process that influences how it develops
+        example: The keystone of any personal injury case is medical evidence
+        plural: ''
+
+aptitude:
+  contents:
+    n:
+      list:
+      - meaning: natural ability or skill, especially in learning
+        example: He has a natural aptitude for teaching
+        plural: ''
+
+anecdotal:
+  contents:
+    adj:
+      list:
+      - meaning: consisting of short stories based on someone's personal experience
+        example: His findings are based on anecdotal evidence rather than serious research
+
+clutch:
+  contents:
+    vt:
+      tense: [clutched clutched clutching]
+      list:
+      - meaning: to hold something tightly because you do not want to lose it
+        example: She was clutching a bottle of champagne
+      - meaning: to suddenly take hold of someone or something because you are frightened, in pain, or in danger
+        example: He clutched at a pillar for support
+    n:
+      list:
+      - meaning: the pedal that you press with your foot when driving a vehicle in order to change gear, or the part of the vehicle that this controls 
+        example: ''
+        plural: clutches
+      - meaning: somebody's clutches
+        example: a small boy trying to escape from his mother's clutches
+        plural: clutches
+      - meaning: clutch of something
+        example: a clutch of eggs
+      - meaning: a tight hold that someone has on something
+        example: I shook myself free of her clutch
+      
+
+decisive:
+  r:
+    adv: 'decisively'
+    n: 'decisiveness'
+  contents:
+    adj:
+      list:
+      - meaning: an action, event etc that is decisive has a big effect on the way that something develops
+        example: Women can play a decisive role in the debate over cloning
+      - meaning: someone who is decisive is good at making decisions quickly and with confidence
+        example: a decisive leader
+      - meaning: definite and clear in a way that leaves no doubt
+        example: The answer was a decisive no
+
+
+prohibitive:
+  r:
+    adv: prohibitively
+  contents:
+    adj:
+      list:
+      - meaning: prohibitive costs are so high that they prevent people from buying or doing something
+        example: The cost of land in Tokyo is prohibitive
+      - meaning: a prohibitive rule prevents people from doing things
+        example: prohibitive regulations
+
+
+

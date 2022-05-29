@@ -1,0 +1,33 @@
+type: object
+allOf: 
+  -
+    properties:
+      _updated:
+        type: number
+      _created:
+        type: number
+      _id:
+        type: string
+      contents:
+        type: object
+        properties:
+          tense:
+            type: array
+            items:
+              type: string
+            maxItems: 3
+            minItems: 3
+          list:
+            type: array
+            items:
+              type: object
+              required: [ meaning example ]
+              properties:
+                meaning:
+                  type: string
+                example:
+                  type: string
+                plural:
+                  type: string
+    required: [ contents ]
+    additionalProperties: false

@@ -1,0 +1,27 @@
+cereal:
+  contents:
+    n:
+      list:
+        - meaning: a breakfast food made from grain and usually eaten with milk
+          example: a bowl of breakfast cereal
+          plural: ""
+        - meaning: a plant grown to produce grain, for example wheat, rice etc
+          example: cereal crops
+          plural: cereals
+  _id: 9cc2cae69a445c466d495d9f1b28052e
+  _created: 1653379884063
+  _updated: 1653380522472
+cope:
+  contents:
+    vi:
+      tense:
+        - coped coped coping
+      list:
+        - meaning: to succeed in dealing with a difficult problem or situation.
+          example: Sometimes i find it hard to cope
+        - meaning: if a system or machine copes with a particular type or amount of work,
+            it does it
+          example: No system is designed to cope with the floods we have had this year.
+  _id: 804116606577c06e1f8f728ce4b05217
+  _created: 1653379884063
+  _updated: 1653380522472
