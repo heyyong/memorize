@@ -20,6 +20,7 @@ craft:
   _created: 1653837641849
   _updated: 1653837641849
 ability:
+  error: true
   contents:
     n:
       list:
@@ -71,6 +72,7 @@ attention:
   _created: 1653837641850
   _updated: 1653837641850
 normal:
+  error: true
   contents:
     adj:
       list:
@@ -135,6 +137,7 @@ service:
   _created: 1653837641850
   _updated: 1653837641850
 suggest:
+  error: true
   contents:
     vt:
       tense:
@@ -206,6 +209,7 @@ crystallize:
   _created: 1653837641850
   _updated: 1653837641850
 continual:
+  error: true
   contents:
     adj:
       list:
@@ -236,6 +240,7 @@ fragrance:
   _created: 1653837641850
   _updated: 1653837641850
 evacuate:
+  error: true
   contents:
     vt:
       tense:
@@ -253,6 +258,7 @@ evacuate:
   _created: 1653837641850
   _updated: 1653837641850
 irrational:
+  error: true
   contents:
     adj:
       list:
@@ -263,6 +269,7 @@ irrational:
   _created: 1653837641850
   _updated: 1653837641850
 succession:
+  error: true
   contents:
     n:
       list:
@@ -278,6 +285,7 @@ succession:
   _created: 1653837641850
   _updated: 1653837641850
 stimulus:
+  error: true
   contents:
     n:
       list:
@@ -302,6 +310,7 @@ semantic:
   _created: 1653837641850
   _updated: 1653837641850
 agile:
+  error: true
   contents:
     adj:
       list:
@@ -349,6 +358,7 @@ fulfillment:
   _created: 1653837641851
   _updated: 1653837641851
 appraisal:
+  error: true
   contents:
     n:
       list:

@@ -8,6 +8,8 @@ allOf:
         type: number
       _id:
         type: string
+      error: 
+        type: boolean
       contents:
         type: object
         properties:

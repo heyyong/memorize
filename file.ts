@@ -46,3 +46,5 @@ export function genMarkdown(vocs: IVocabulary[]): string {
 
     return content;
 }
+
+export function genMobi()
