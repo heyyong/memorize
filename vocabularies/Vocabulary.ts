@@ -11,6 +11,7 @@ export class Vocabulary {
     public created: number;
     public updated: number;
     public properties: PropertySet[];
+    public error: boolean;
 
     public r: Record<string, any>;
 
@@ -60,6 +61,12 @@ export class Vocabulary {
         if (prop.r) {
             this.r = prop.r;
         }
+
+        if (prop.error !== undefined) {
+            this.error = prop.error
+        } else {
+            this.error = false;
+        }
     }
 
     public toJSON(): [voc: string, obj: any] {
@@ -68,6 +75,7 @@ export class Vocabulary {
         const obj = {
             contents: {} as any,
             r: _this.r,
+            error: _this.error,
             _id: _this.id,
             _created: _this.created,
             _updated: _this._updated ? new Date().getTime() : _this.updated,

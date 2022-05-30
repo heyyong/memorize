@@ -16,11 +16,11 @@ craft:
         - meaning: skill in deceiving people
           example: Craft and cunning were necessary for the scheme to work
   r: {}
+  error: false
   _id: bb9603e25ee9013baf165543b57fadab
   _created: 1653837641849
   _updated: 1653837641849
 ability:
-  error: true
   contents:
     n:
       list:
@@ -31,6 +31,7 @@ ability:
           example: The test measures your mathematical ability.
           plural: ""
   r: {}
+  error: false
   _id: 18711d6865035ab23d0deda0933fd749
   _created: 1653837641849
   _updated: 1653837641849
@@ -43,6 +44,7 @@ afford:
         - meaning: to provide something or allow something to happen
           example: The room affords a beautiful view over the city
   r: {}
+  error: false
   _id: 91c604bd32268bab2dbf13f816edde5f
   _created: 1653837641850
   _updated: 1653837641850
@@ -68,11 +70,11 @@ attention:
           example: Pets need a lot of care and attention
           plural: ""
   r: {}
+  error: false
   _id: 75ef8bb7e8ac37d6c7493607cb2d262a
   _created: 1653837641850
   _updated: 1653837641850
 normal:
-  error: true
   contents:
     adj:
       list:
@@ -81,6 +83,7 @@ normal:
         - meaning: someone who is normal is mentally and physically healthy
           example: He seems a perfectly normal little boy.
   r: {}
+  error: false
   _id: cf267fa13ede7db826816769911194f0
   _created: 1653837641850
   _updated: 1653837641850
@@ -133,11 +136,11 @@ service:
           example: the service of a summons
           plural: ""
   r: {}
+  error: false
   _id: dbd3909746aff5ef883ee0ca48e988b4
   _created: 1653837641850
   _updated: 1653837641850
 suggest:
-  error: true
   contents:
     vt:
       tense:
@@ -156,6 +159,7 @@ suggest:
         - meaning: to remind someone of something or help them to imagine it
           example: The stage was bare, with only the lighting to suggest a prison
   r: {}
+  error: false
   _id: 9c415250c6d4db19847a2f7f175c3f8a
   _created: 1653837641850
   _updated: 1653837641850
@@ -167,6 +171,7 @@ prerequisite:
           example: A reasonable proficiency in English is prerequisite for the course
           plural: prerequisites
   r: {}
+  error: false
   _id: 33f8ec88d551259006354ac007467ed9
   _created: 1653837641850
   _updated: 1653837641850
@@ -181,6 +186,7 @@ cereal:
           example: cereal crops
           plural: cereals
   r: {}
+  error: false
   _id: eb8aa860a12b43f99943e421b54761ae
   _created: 1653837641850
   _updated: 1653837641850
@@ -192,6 +198,7 @@ latent:
             become more noticeable in the future
           example: The virus remains latent in the body for many years
   r: {}
+  error: false
   _id: fb9c31717574baf28137bd26b2636f9a
   _created: 1653837641850
   _updated: 1653837641850
@@ -205,11 +212,11 @@ crystallize:
             clear in your mind
           example: Inside her a thought was crystallizing
   r: {}
+  error: false
   _id: 088e7e8dec8643f39b1789a37f038146
   _created: 1653837641850
   _updated: 1653837641850
 continual:
-  error: true
   contents:
     adj:
       list:
@@ -224,6 +231,7 @@ continual:
       - continuous
       - constant
       - uninterrupted non-stop on-going solid
+  error: false
   _id: 3f9f2549c75ff5b5b574fd8bf797f930
   _created: 1653837641850
   _updated: 1653837641850
@@ -236,11 +244,11 @@ fragrance:
         - meaning: a liquid that you put on your body to make it smell pleasant
           example: ""
   r: {}
+  error: false
   _id: 1a3409931f4883b50c63f79dcda2d914
   _created: 1653837641850
   _updated: 1653837641850
 evacuate:
-  error: true
   contents:
     vt:
       tense:
@@ -254,22 +262,22 @@ evacuate:
           example: ""
   r:
     n: evacuation
+  error: false
   _id: 9501a94937d0fa436667978216b4c0a3
   _created: 1653837641850
   _updated: 1653837641850
 irrational:
-  error: true
   contents:
     adj:
       list:
         - meaning: not based on clear thought or reason
           example: an irrational fear of flying
   r: {}
+  error: false
   _id: 2c30bfeff47d469eb4657f9c04417edf
   _created: 1653837641850
   _updated: 1653837641850
 succession:
-  error: true
   contents:
     n:
       list:
@@ -281,11 +289,11 @@ succession:
             the next to take it
           example: If the prince dies, the succession passes to his son
   r: {}
+  error: false
   _id: c476ce5fa985911417a578e210e2980a
   _created: 1653837641850
   _updated: 1653837641850
 stimulus:
-  error: true
   contents:
     n:
       list:
@@ -295,6 +303,7 @@ stimulus:
         - meaning: something that makes someone or something move or react
           example: at this age, the infant begins to react more to visual stimuli
   r: {}
+  error: false
   _id: d5ad02099c366f9a6ac86eb80df4570c
   _created: 1653837641850
   _updated: 1653837641850
@@ -306,11 +315,11 @@ semantic:
           example: ""
   r:
     adv: semantically
+  error: false
   _id: 48c759bef9900a31af9551a395c284a9
   _created: 1653837641850
   _updated: 1653837641850
 agile:
-  error: true
   contents:
     adj:
       list:
@@ -320,6 +329,7 @@ agile:
             intelligently
           example: He was physically strong and mentally agile
   r: {}
+  error: false
   _id: 60979e8990f394406533dc47032d2604
   _created: 1653837641850
   _updated: 1653837641850
@@ -336,6 +346,7 @@ revival:
         - meaning: a new production of play that has not been performed for a long time
           example: Neeson was excellent in a revival of Eugene O'Neill's 'Anna Christie'
   r: {}
+  error: false
   _id: c034a6c5ad1b87bbe3e90188be3382ba
   _created: 1653837641851
   _updated: 1653837641851
@@ -354,11 +365,11 @@ fulfillment:
             government's campaign pledges
           plural: ""
   r: {}
+  error: false
   _id: 9df9b7f2f41ac5b0d7ce69b1f8647888
   _created: 1653837641851
   _updated: 1653837641851
 appraisal:
-  error: true
   contents:
     n:
       list:
@@ -371,6 +382,7 @@ appraisal:
           example: ""
           plural: ""
   r: {}
+  error: false
   _id: 66f37b9da61f124a6008192b07670a5b
   _created: 1653837641851
   _updated: 1653837641851
@@ -382,6 +394,7 @@ retailer:
           example: ""
           plural: ""
   r: {}
+  error: false
   _id: f92ead0985bf93b2cb6987ec663779e5
   _created: 1653837641851
   _updated: 1653837641851
@@ -392,6 +405,7 @@ marginally:
         - meaning: not enough to make an important difference
           example: Gina's grades have improved marginally since last term.
   r: {}
+  error: false
   _id: a5111eb434b97ed861ce6c98e3267481
   _created: 1653837641851
   _updated: 1653837641851
@@ -405,6 +419,7 @@ disillusion:
             good is really true or good
           example: I hate to disillusion you, but I don't think she's coming back.
   r: {}
+  error: false
   _id: 01efbd1162707a791605e4f456245112
   _created: 1653837641851
   _updated: 1653837641851
@@ -420,6 +435,7 @@ calibrate:
         - meaning: to mark an instrument or tool so that you can use it for measuring
           example: ""
   r: {}
+  error: false
   _id: 13d98ba81ebde0b6c20b2c97b8b93623
   _created: 1653837641851
   _updated: 1653837641851
@@ -431,6 +447,7 @@ beforehand:
           example: The police need to be briefed beforehand on how to deal with this sort
             of situation
   r: {}
+  error: false
   _id: e8abeef53ca4a682ac928980523249bc
   _created: 1653837641851
   _updated: 1653837641851
@@ -446,6 +463,7 @@ keystone:
           example: The keystone of any personal injury case is medical evidence
           plural: ""
   r: {}
+  error: false
   _id: def8c72bd78a3adfa02401569a798d36
   _created: 1653837641851
   _updated: 1653837641851
@@ -457,6 +475,7 @@ aptitude:
           example: He has a natural aptitude for teaching
           plural: ""
   r: {}
+  error: false
   _id: 4205c7a22a4576943f3a36a3b813275f
   _created: 1653837641851
   _updated: 1653837641851
@@ -468,6 +487,7 @@ anecdotal:
           example: His findings are based on anecdotal evidence rather than serious
             research
   r: {}
+  error: false
   _id: 3e5d5237e614dcdfccef5100c6e995be
   _created: 1653837641851
   _updated: 1653837641851
@@ -496,6 +516,7 @@ clutch:
         - meaning: a tight hold that someone has on something
           example: I shook myself free of her clutch
   r: {}
+  error: false
   _id: 09f3a7e1a011f390c638c63afc6d5b30
   _created: 1653837641851
   _updated: 1653837641851
@@ -514,6 +535,7 @@ decisive:
   r:
     adv: decisively
     n: decisiveness
+  error: false
   _id: bad0a4f69eafd47e95eaccd1247e3eea
   _created: 1653837641851
   _updated: 1653837641851
@@ -528,6 +550,7 @@ prohibitive:
           example: prohibitive regulations
   r:
     adv: prohibitively
+  error: false
   _id: 31d97ec30bf87886c75d7fa8035868db
   _created: 1653837641851
   _updated: 1653837641851
