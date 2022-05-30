@@ -24,6 +24,10 @@ export class Vocabulary {
         this.fromJSON(voc, prop)
     }
 
+    public belong(cla: [cla: string, set: string]): boolean {
+        return this.cla === cla[0] && this.volSet === cla[1];
+    }
+
     public getId(): string {
         const format = `${this.cla}_${this.volSet}_${this.voc}`;
 

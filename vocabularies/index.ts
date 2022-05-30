@@ -91,19 +91,3 @@ export async function writeBackVoc(call: string, vocSet: string, vocs: Vocabular
     await promises.writeFile(join(vocAddr, call, vocSet), str)
 }
 
-// (async function main() {
-//     const classification = await getVocClassification()
-//     const vocList = await getVocabularies(classification[0])
-
-//     for (const voc of vocList) {
-//         assert(voc.id)
-//         assert(voc.created)
-//         assert(voc.updated)
-//         assert(voc.cla, 'ietls')
-//         assert(voc.volSet, '1_example')
-
-//     }
-
-//     await writeToFile(vocList[0].cla, vocList[0].volSet, vocList)
-// })()
-
