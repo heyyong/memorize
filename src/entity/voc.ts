@@ -109,3 +109,53 @@ export class Example {
     @UpdateDateColumn()
     public updated: number;
 }
+
+@Entity()
+export class MemorizedPlan {
+    @PrimaryGeneratedColumn()
+    public id: number;
+
+    @Column()
+    public from: number;
+
+    @Column()
+    public to: number;
+
+    @Column('simple-array', {
+    })
+    public rand: string[];
+
+    @CreateDateColumn()
+    public created: number;
+
+    @Column({
+        default: 0,
+    })
+    public finished: boolean;
+
+    @UpdateDateColumn()
+    public updated: number;
+}
+
+@Entity()
+export class MemorizedRecord {
+    @PrimaryGeneratedColumn()
+    public id: number;
+
+    @Index()
+    @Column()
+    public voc: string;
+
+    @Column({ default: 0 })
+    public count: number;
+
+    @Index()
+    @Column()
+    public memorized_plan_id: number;
+
+    @CreateDateColumn()
+    public created: number;
+
+    @UpdateDateColumn()
+    public updated: number;
+}

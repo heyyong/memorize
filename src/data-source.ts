@@ -1,6 +1,7 @@
+import { Task } from "@/entity/task";
 import "reflect-metadata"
 import { DataSource } from "typeorm"
-import { Voc, Property, Meaning, Pronunciation, Example } from './entity/voc';
+import { Voc, Property, Meaning, Pronunciation, Example, MemorizedRecord, MemorizedPlan } from './entity/voc';
 
 export const AppDataSource = new DataSource({
     type: 'sqlite',
@@ -8,7 +9,7 @@ export const AppDataSource = new DataSource({
 
     synchronize: true,
     logging: false,
-    entities: [Voc, Property, Meaning, Pronunciation, Example],
+    entities: [Voc, Property, Meaning, Pronunciation, Example, MemorizedRecord, MemorizedPlan, Task],
     migrations: [],
     subscribers: [],
 })

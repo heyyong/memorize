@@ -33,7 +33,55 @@ message Example {
 }
 
 service MemorizeService {
+    rpc GenNewMemorizePlan(GenNewMemorizePlanRequest) returns (GenNewMemorizePlanResponse);
+    rpc MarkWord(MarkWordRequest) returns (MarkWordResponse);
+    rpc GetNextWord(GetNextWordRequest) returns (GetNextWordResponse);
+
     rpc GetWordList (GetWordListRequest) returns (GetWordListResponse);
+    rpc TriggerWordSync (TriggerWordSyncRequest) returns (TriggerWordSyncResponse);
+}
+
+message TriggerWordSyncRequest {
+    repeated string cla = 1;
+    optional int32 offset = 2;
+    optional int32 limit = 3;
+}
+
+message TriggerWordSyncResponse { 
+    required int32 id = 1;
+}
+
+message GetNextWordRequest {
+    required int32 planId = 1;
+    required string spell = 2;
+}
+
+message GetNextWordResponse {
+    optional string word = 1;
+}
+
+message MarkWordRequest {
+    required int32 planId = 1;
+    required string word = 2;
+
+    enum MemorizedStatus {
+        Approvad = 0;
+        Rejected = 1;
+    }
+    required MemorizedStatus status = 50;
+}
+
+message MarkWordResponse {
+    required int32 id = 1;
+}
+
+message GenNewMemorizePlanRequest {
+    required int32 from = 1;
+    required int32 to = 2;
+}
+
+message GenNewMemorizePlanResponse {
+    required int32 planId = 1;
 }
 
 message GetWordListRequest {
@@ -43,6 +91,8 @@ message GetWordListRequest {
 
 message GetWordListResponse {
     repeated Word wordList = 1;
+
+    required int32 count = 30;
 
     required int32 offset = 50;
     required int32 total = 51;

@@ -10,7 +10,7 @@ const App: FunctionalComponent = () => {
         <div id="preact_root">
             <Header progress={50} />
             <Router>
-                <Route path="/enen/" component={MemorizeEnen} />
+                <Route path="/enen/:from/:to" component={MemorizeEnen} />
                 <NotFound default />
             </Router>
         </div>

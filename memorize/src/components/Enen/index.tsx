@@ -5,28 +5,21 @@ import ClearIcon from '@mui/icons-material/Clear';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import style from './enen.css';
+import { Voc } from '../voc';
 
 import { H1 } from '../h1';
 import { H5 } from '../h5';
 
-interface IVoc {
-    voc: string;
-    cla: string;
-    pron: {
-        audio: string;
-        phonetic: string;
-    },
-}
 
 interface IEnenProps {
     offset: number;
-    voc: IVoc;
+    voc: Voc;
 
     total: number;
     remain: number;
 
-    onApprove?: (offset: number) => void;
-    onReject?: (offset: number) => void;
+    onApprove?: (spell: string) => void;
+    onReject?: (spell: string) => void;
     onNext?: (offset: number) => void;
 }
 
