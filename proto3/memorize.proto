@@ -1,0 +1,49 @@
+message Word {
+    required int32 id = 1;
+    required string voc = 2;
+    required string cla = 3;
+
+    required Pron pron = 20;
+    repeated Property properties = 50;
+}
+
+message Property {
+    required int32 id = 1;
+    required string prop = 2;
+
+    repeated Meaning meanings = 50;
+}
+
+message Pron {
+    required int32 id = 1;
+    required string audio = 2;
+    required string phonetic = 3;
+}
+
+message Meaning {
+    required int32 id = 1;
+    required string content = 2;
+
+    repeated Example examples = 50;
+}
+
+message Example {
+    required int32 id = 1;
+    required string example = 2;
+}
+
+service MemorizeService {
+    rpc GetWordList (GetWordListRequest) returns (GetWordListResponse);
+}
+
+message GetWordListRequest {
+    required int32 offset = 1;
+    required int32 pageSize = 2;
+}
+
+message GetWordListResponse {
+    repeated Word wordList = 1;
+
+    required int32 offset = 50;
+    required int32 total = 51;
+}

@@ -1,0 +1,62 @@
+.enen {
+    padding: 70px 10px;
+    min-height: 100%;
+    width: 100%;
+}
+
+.enen_phonetic {
+    color: #777;
+    font-size: 14px;
+    margin-right: 5px;
+    padding-bottom: 16px;
+}
+
+.enen_phonetic_button {
+    position: relative;
+    top: 7px;
+}
+
+.enen_meaning {
+    margin: 0;
+    padding: 0;
+    padding-left: 16px;
+}
+
+.enen_meaning_item {
+    color: #111;
+    margin-left: 16px;
+}
+
+.enen_meaning_item_content {
+    padding-bottom: 8px;
+}
+
+.enen_example {
+    list-style: none;
+    border-spacing: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.enen_example_item {
+    padding: 0 0 8px;
+    list-style: none;
+    list-style-type: disc;
+    display: list-item;
+    margin-left: 15px;
+    color: #767676;
+}
+
+.enen_feedback {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.enen_next {
+    width: 100%;
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+}
