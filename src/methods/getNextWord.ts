@@ -63,6 +63,9 @@ async function nextWord(r: GetNextWordRequest): Promise<GetNextWordResponse> {
 
 
     plan.memorized = currI;
+    if (next === undefined) {
+        plan.finished = true;
+    }
     await planReg.save(plan);
 
     return {
