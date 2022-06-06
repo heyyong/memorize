@@ -9,6 +9,7 @@
    "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "start": "ts-node src/index.ts | pino-pretty",
+      "gate": "grpcwebproxy --backend_addr=localhost:8099 --run_tls_server=false --server_http_debug_port=8081 --allow_all_origins",
       "typeorm": "typeorm-ts-node-commonjs",
       "build:proto": "proto-loader-gen-types --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=src/methods/memorize proto3/*.proto"
    },
@@ -26,6 +27,7 @@
       "axios": "^0.27.2",
       "commander": "^9.2.0",
       "date-fns": "^2.28.0",
+      "grpc-web-proxy": "^0.0.3",
       "lodash.throttle": "^4.1.1",
       "markdown-pdf": "^10.0.0",
       "md5": "^2.3.0",

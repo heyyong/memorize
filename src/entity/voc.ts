@@ -125,6 +125,11 @@ export class MemorizedPlan {
     })
     public rand: string[];
 
+    @Column({
+        default: -1,
+    })
+    public memorized: number;
+
     @CreateDateColumn()
     public created: number;
 

@@ -1,5 +1,7 @@
 import { h, FunctionComponent } from 'preact';
 
-export const NotFound: FunctionComponent = (props) => {
+const NotFound: FunctionComponent = (props) => {
     return <h1>404</h1>
 }
+
+export default NotFound;

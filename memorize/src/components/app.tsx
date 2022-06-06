@@ -2,7 +2,7 @@ import { FunctionalComponent, h } from 'preact';
 import { Route, Router } from 'preact-router';
 
 import { default as MemorizeEnen } from '../routes/MemorizeEnen';
-import { NotFound } from '../routes/NotFound';
+import { default as NotFound } from '../routes/NotFound';
 import Header from './header';
 
 const App: FunctionalComponent = () => {
@@ -11,7 +11,7 @@ const App: FunctionalComponent = () => {
             <Header progress={50} />
             <Router>
                 <Route path="/enen/:from/:to" component={MemorizeEnen} />
-                <NotFound default />
+                {/* <NotFound /> */}
             </Router>
         </div>
     );

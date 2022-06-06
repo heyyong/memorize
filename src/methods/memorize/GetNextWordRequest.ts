@@ -4,9 +4,11 @@
 export interface GetNextWordRequest {
   'planId'?: (number);
   'spell'?: (string);
+  '_spell'?: "spell";
 }
 
 export interface GetNextWordRequest__Output {
   'planId': (number);
-  'spell': (string);
+  'spell'?: (string);
+  '_spell': "spell";
 }

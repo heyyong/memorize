@@ -5,10 +5,14 @@ export interface TriggerWordSyncRequest {
   'cla'?: (string)[];
   'offset'?: (number);
   'limit'?: (number);
+  '_offset'?: "offset";
+  '_limit'?: "limit";
 }
 
 export interface TriggerWordSyncRequest__Output {
   'cla': (string)[];
-  'offset': (number);
-  'limit': (number);
+  'offset'?: (number);
+  'limit'?: (number);
+  '_offset': "offset";
+  '_limit': "limit";
 }
