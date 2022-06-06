@@ -19,48 +19,44 @@ export const getNextWord: MemorizeServiceHandlers['GetNextWord'] = (call, callba
 async function nextWord(r: GetNextWordRequest): Promise<GetNextWordResponse> {
     let { planId, spell } = r;
 
+
     const planReg = AppDataSource.getRepository(MemorizedPlan);
 
     let plan = await planReg.findOne({ where: { id: planId } });
     if (!plan || plan.rand.length === 0) throw new Error(`Invalid memorized plan ${planId}`);
-
-    let currI: number;
-    if (!spell) {
-        currI = plan.memorized;
-    } else {
-        currI = plan.rand.indexOf(spell);
-        if (currI < 0) throw new Error(`Dont find spell ${spell} in plan ${planId}`);
+    if (spell && plan.rand.indexOf(spell) < 0) {
+        throw new Error(`Dont find spell ${spell} in plan ${planId}`);
     }
 
-    const recReg = AppDataSource.getRepository(MemorizedRecord);
+    let currI: number = plan.memorized;
+    logger.info(`[nextWord] assign currI=${currI}`)
+
     const vocReg = AppDataSource.getRepository(Voc);
+    while (currI < (plan.rand.length - 1) && plan.memorizing.length < 5) {
+        currI++;
+        plan.memorizing.push(plan.rand[currI]);
+    }
+    logger.info(`[nextWord] push memorizing=%o`, plan.memorizing);
 
     let next: Word | undefined = undefined;
-    while (currI !== (plan.rand.length - 1)) {
-        currI += 1;
-        spell = plan.rand[currI];
-        logger.info(`[nextWord] currI=${currI} spell=${spell}`)
-
-        let rec = await recReg.findOne({ where: { voc: spell, memorized_plan_id: planId } });
-        if (!rec) {
-            rec = new MemorizedRecord();
-            rec.voc = spell;
-            rec.memorized_plan_id = planId;
-            rec = await recReg.save(rec);
-            logger.info(`[nextWord] rec=${rec}`)
+    if (plan.memorizing.length) {
+        let nextW: string = plan.memorizing[0];
+        while (plan.memorizing.length > 1) {
+            const nextI = Math.floor(Math.random() * plan.memorizing.length)
+            nextW = plan.memorizing[nextI];
+            if (nextW === spell) {
+                continue;
+            }
+            break;
         }
 
-        if (rec.count > 3) {
-            continue
-        }
+        logger.info(`[nextWord] nextW=${nextW}`);
 
-        const mVoc = await vocReg.findOne({ where: { voc: spell } });
+        const mVoc = await vocReg.findOne({ where: { voc: nextW } });
         const voc = await composeWords([mVoc]);
 
         next = voc[0];
-        break;
     }
-
 
     plan.memorized = currI;
     if (next === undefined) {

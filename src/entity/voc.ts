@@ -121,10 +121,10 @@ export class MemorizedPlan {
     @Column()
     public to: number;
 
-    @Column({ nullable: true })
+    @Column({ default: 0, nullable: true })
     public rFrom: number;
 
-    @Column({ nullable: true })
+    @Column({ default: 0, nullable: true })
     public rTo: number;
 
     @Column('simple-array', {
@@ -135,6 +135,9 @@ export class MemorizedPlan {
         default: -1,
     })
     public memorized: number;
+
+    @Column('simple-array')
+    public memorizing: string[] = [];
 
     @CreateDateColumn()
     public created: number;

@@ -1,5 +1,6 @@
 import { Component, h } from 'preact';
 import Button from '@mui/material/Button';
+import LinearProgress from '@mui/material/LinearProgress';
 
 import { default as Enen } from '../../components/Enen';
 import { api } from '../../api';
@@ -9,12 +10,14 @@ import style from './style.css';
 interface IMemorizeEnenState {
     planId: number;
     voc: Word | null;
+    progress: undefined | number;
 }
 
 export default class MemorizeEnen extends Component<{}, IMemorizeEnenState> {
     public state: IMemorizeEnenState = {
         planId: 0,
         voc: null,
+        progress: undefined,
     }
 
     public genMemorizePlan = async () => {
@@ -28,8 +31,8 @@ export default class MemorizeEnen extends Component<{}, IMemorizeEnenState> {
 
     public nextWord = async () => {
         const response = await api.getNextWord({ planId: this.state.planId, spell: this.state.voc?.voc });
-        this.setState({ voc: response.word || null });
-        console.log(this.state, response);
+        const { offset, total } = response;
+        this.setState({ voc: response.word || null, progress: Math.floor((offset! / total!) * 100) });
     }
 
     public onVocApprove = async (spell: string) => {
@@ -55,12 +58,15 @@ export default class MemorizeEnen extends Component<{}, IMemorizeEnenState> {
         let content: JSX.Element | null = null;
         if (this.state.voc && this.state.planId) {
             content = (
-                <Enen
-                    voc={this.state.voc}
-                    onNext={this.nextWord}
-                    onApprove={this.onVocApprove}
-                    onReject={this.onVocRejected}
-                ></Enen>
+                <div>
+                    {this.state.progress && <LinearProgress color="secondary" variant='determinate' value={this.state.progress} />}
+                    <Enen
+                        voc={this.state.voc}
+                        onNext={this.nextWord}
+                        onApprove={this.onVocApprove}
+                        onReject={this.onVocRejected}
+                    ></Enen>
+                </div>
             )
         } else {
             content = (

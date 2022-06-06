@@ -1,7 +1,11 @@
 # Memorize
 
 ## TODO:
-* [ ] Change nextWord algorithm to improve order of the vocabularies memorizing.
+* [ ] Fix the meaning of the vocabularies clawing.
+* [ ] Fix auto play audio when showing new word.
+* [ ] Add bottom margin to operation buttons
+* [ ] Give a congratulation view when finishing memorizing
+* [x] Change nextWord algorithm to improve order of the vocabularies memorizing.
 * [ ] Auto generate memorizing plan, with review memorizing last time.
 * [ ] Support generate pictures
 * [ ] Support memorizing word group

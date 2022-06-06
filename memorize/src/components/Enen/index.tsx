@@ -76,12 +76,12 @@ export default class Enen extends Component<IEnenProps, IEnenState> {
                 <Button
                     variant="text"
                     color="error"
-                    onClick={async () => this.props.onApprove?.(this.props.voc.voc).then(() => this.setState({ marked: true }))}
+                    onClick={async () => this.props.onReject?.(this.props.voc.voc).then(() => this.setState({ marked: true }))}
                     // @ts-ignore
                     startIcon={<ClearIcon color="error" />}>Reject</Button>
                 <Button
                     variant="text"
-                    onClick={async () => this.props.onReject?.(this.props.voc.voc).then(() => this.setState({ marked: true }))}
+                    onClick={async () => this.props.onApprove?.(this.props.voc.voc).then(() => this.setState({ marked: true }))}
                     // @ts-ignore
                     startIcon={<DoneIcon color="primary" />}>Approve</Button>
             </Stack>
