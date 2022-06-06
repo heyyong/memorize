@@ -1,7 +1,10 @@
-# Awesome Project Build with TypeORM
+# Memorize
 
-Steps to run this project:
-
-1. Run `npm i` command
-2. Setup database settings inside `data-source.ts` file
-3. Run `npm start` command
+## TODO:
+* [ ] Change nextWord algorithm to improve order of the vocabularies memorizing.
+* [ ] Auto generate memorizing plan, with review memorizing last time.
+* [ ] Support generate pictures
+* [ ] Support memorizing word group
+* [ ] Support listen word and then spell it
+* [ ] Support make sentences according to the words
+* [ ] 
