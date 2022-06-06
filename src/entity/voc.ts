@@ -121,6 +121,12 @@ export class MemorizedPlan {
     @Column()
     public to: number;
 
+    @Column({ nullable: true })
+    public rFrom: number;
+
+    @Column({ nullable: true })
+    public rTo: number;
+
     @Column('simple-array', {
     })
     public rand: string[];
