@@ -13,33 +13,44 @@ async function newMemorizePlan(r: GenNewMemorizePlanRequest): Promise<GenNewMemo
     const planReg = AppDataSource.getRepository(MemorizedPlan);
     const vocReg = AppDataSource.getRepository(Voc);
 
-    const plans = await planReg.find({ where: { finished: false } });
+    let plans = await planReg.find({ where: { finished: false }, order: { created: 'DESC' }, });
     if (plans.length > 0) {
         const plan = plans.pop();
 
         return { planId: plan.id };
     }
 
-    const { from, to } = r;
-    let vocs = await vocReg.find({
+    let vocs = await vocReg.findOne({
         order: {
             id: "DESC",
         },
-        take: 1,
     });
 
-    if (vocs.length === 0) {
+    const { count } = r;
+    let start = 0;
+    let end = 0;
+    {
+        const lastPlan = await planReg.findOne({ where: { finished: true }, order: { created: 'DESC' } })
+        if (lastPlan) {
+            start = lastPlan.id;
+        }
+
+        end = start + count;
+    }
+
+
+    if (vocs === undefined) {
         throw new Error(`No valid vocabularies`);
-    } else if (vocs[0].id < to) {
+    } else if (vocs[0].id < end) {
         throw new Error(`Check your to index. oversize`);
     }
 
-    const vocIDList = (await vocReg.findBy({ id: Between(from, to) })).map(voc => voc.voc);
+    const vocIDList = (await vocReg.findBy({ id: Between(start, end) })).map(voc => voc.voc);
 
     let plan = new MemorizedPlan();
 
-    plan.from = from;
-    plan.to = to;
+    plan.from = start;
+    plan.to = end;
     plan.rand = vocIDList.sort((a, b) => Math.random() - 0.5);
 
     plan = await planReg.save(plan);

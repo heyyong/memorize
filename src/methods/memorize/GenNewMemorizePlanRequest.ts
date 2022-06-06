@@ -2,11 +2,9 @@
 
 
 export interface GenNewMemorizePlanRequest {
-  'from'?: (number);
-  'to'?: (number);
+  'count'?: (number);
 }
 
 export interface GenNewMemorizePlanRequest__Output {
-  'from': (number);
-  'to': (number);
+  'count': (number);
 }

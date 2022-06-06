@@ -74,8 +74,7 @@ export interface MarkWordResponse {
 }
 
 export interface GenNewMemorizePlanRequest {
-  from: number;
-  to: number;
+  count: number;
 }
 
 export interface GenNewMemorizePlanResponse {
@@ -674,7 +673,7 @@ export const MarkWordResponse = {
 };
 
 function createBaseGenNewMemorizePlanRequest(): GenNewMemorizePlanRequest {
-  return { from: 0, to: 0 };
+  return { count: 0 };
 }
 
 export const GenNewMemorizePlanRequest = {
@@ -682,11 +681,8 @@ export const GenNewMemorizePlanRequest = {
     message: GenNewMemorizePlanRequest,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    if (message.from !== 0) {
-      writer.uint32(8).int32(message.from);
-    }
-    if (message.to !== 0) {
-      writer.uint32(16).int32(message.to);
+    if (message.count !== 0) {
+      writer.uint32(8).int32(message.count);
     }
     return writer;
   },
@@ -702,10 +698,7 @@ export const GenNewMemorizePlanRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.from = reader.int32();
-          break;
-        case 2:
-          message.to = reader.int32();
+          message.count = reader.int32();
           break;
         default:
           reader.skipType(tag & 7);
@@ -719,8 +712,7 @@ export const GenNewMemorizePlanRequest = {
     object: DeepPartial<GenNewMemorizePlanRequest>
   ): GenNewMemorizePlanRequest {
     const message = createBaseGenNewMemorizePlanRequest();
-    message.from = object.from ?? 0;
-    message.to = object.to ?? 0;
+    message.count = object.count ?? 0;
     return message;
   },
 };

@@ -11,14 +11,14 @@ interface IMemorizeEnenState {
     voc: Word | null;
 }
 
-export default class MemorizeEnen extends Component<{ from: number, to: number }, IMemorizeEnenState> {
+export default class MemorizeEnen extends Component<{}, IMemorizeEnenState> {
     public state: IMemorizeEnenState = {
         planId: 0,
         voc: null,
     }
 
     public genMemorizePlan = async () => {
-        const response = await api.genNewMemorizePlan({ from: 0, to: 100, })
+        const response = await api.genNewMemorizePlan({ count: 100 });
         this.setState({ planId: response.planId });
     }
 

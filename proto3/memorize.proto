@@ -80,8 +80,7 @@ message MarkWordResponse {
 }
 
 message GenNewMemorizePlanRequest {
-     int32 from = 1;
-     int32 to = 2;
+    int32 count = 1;
 }
 
 message GenNewMemorizePlanResponse {
