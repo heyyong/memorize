@@ -7,4 +7,4 @@
 * [ ] Support memorizing word group
 * [ ] Support listen word and then spell it
 * [ ] Support make sentences according to the words
-* [ ] 
+* [ ] Support dictionary ability
