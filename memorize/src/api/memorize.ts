@@ -1,4 +1,5 @@
 /* eslint-disable */
+// @ts-ignore
 import * as Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { CallContext, CallOptions } from "nice-grpc-common";

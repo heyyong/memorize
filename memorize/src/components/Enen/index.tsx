@@ -120,15 +120,17 @@ class Phonetic extends Component<IPhoneticProps> {
 
     public componentWillReceiveProps(nextProps: IPhoneticProps) {
         if (this.props.playWhenMounted && this.props.audio !== nextProps.audio) {
-            console.log('update')
-            this.play();
+            window.setTimeout(() => {
+                this.play();
+            }, 500)
         }
     }
 
     public componentDidMount() {
         if (this.props.playWhenMounted) {
-            console.log('play')
-            this.play();
+            window.setTimeout(() => {
+                this.play();
+            }, 500)
         }
     }
 
