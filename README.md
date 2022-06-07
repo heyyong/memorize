@@ -2,7 +2,7 @@
 
 ## TODO:
 * [ ] Fix the meaning of the vocabularies clawing.
-* [ ] Fix auto play audio when showing new word.
+* [x] Fix auto play audio when showing new word.
 * [ ] Add bottom margin to operation buttons
 * [ ] Give a congratulation view when finishing memorizing
 * [x] Change nextWord algorithm to improve order of the vocabularies memorizing.

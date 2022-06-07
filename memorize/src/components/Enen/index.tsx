@@ -14,9 +14,9 @@ import { H5 } from '../h5';
 interface IEnenProps {
     voc: Word;
 
-    onApprove?: (spell: string) => Promise<void>;
-    onReject?: (spell: string) => Promise<void>;
-    onNext?: (spell: string) => Promise<void>;
+    onApprove: (spell: string) => Promise<void>;
+    onReject: (spell: string) => Promise<void>;
+    onNext: (spell: string) => Promise<void>;
 }
 
 interface IEnenState {
@@ -27,6 +27,18 @@ export default class Enen extends Component<IEnenProps, IEnenState> {
     public state: IEnenState = {
         marked: false,
     };
+
+    public playAudio: null | (() => void) = null
+
+    public setPlayAudio = (cb: () => void) => {
+        this.playAudio = cb;
+    }
+
+    public onOp = (op: (spell: string) => Promise<void>): Promise<void> => {
+        this.playAudio?.();
+
+        return op(this.props.voc.voc);
+    }
 
     private _renderVoc() {
         return (
@@ -76,12 +88,12 @@ export default class Enen extends Component<IEnenProps, IEnenState> {
                 <Button
                     variant="text"
                     color="error"
-                    onClick={async () => this.props.onReject?.(this.props.voc.voc).then(() => this.setState({ marked: true }))}
+                    onClick={async () => this.onOp(this.props.onReject).then(() => this.setState({ marked: true }))}
                     // @ts-ignore
                     startIcon={<ClearIcon color="error" />}>Reject</Button>
                 <Button
                     variant="text"
-                    onClick={async () => this.props.onApprove?.(this.props.voc.voc).then(() => this.setState({ marked: true }))}
+                    onClick={async () => this.onOp(this.props.onApprove).then(() => this.setState({ marked: true }))}
                     // @ts-ignore
                     startIcon={<DoneIcon color="primary" />}>Approve</Button>
             </Stack>
@@ -97,6 +109,7 @@ export default class Enen extends Component<IEnenProps, IEnenState> {
                 <Phonetic
                     audio={this.props.voc!.pron!.audio}
                     phonetic={this.props.voc.pron!.phonetic}
+                    onPlay={this.setPlayAudio}
                     playWhenMounted
                 />
                 {marked ? this._renderVoc() : this._renderOpetion()}
@@ -109,6 +122,8 @@ interface IPhoneticProps {
     audio: string;
     phonetic: string;
     playWhenMounted: boolean;
+
+    onPlay(cb: () => void): void;
 }
 
 class Phonetic extends Component<IPhoneticProps> {
@@ -130,7 +145,9 @@ class Phonetic extends Component<IPhoneticProps> {
         if (this.props.playWhenMounted) {
             window.setTimeout(() => {
                 this.play();
-            }, 500)
+            }, 500);
+
+            this.props.onPlay(this.play);
         }
     }
 
