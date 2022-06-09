@@ -11,7 +11,8 @@
       "start": "ts-node src/index.ts | pino-pretty",
       "gate": "grpcwebproxy --backend_addr=localhost:8099 --run_tls_server=false --server_http_debug_port=8081 --allow_all_origins",
       "typeorm": "typeorm-ts-node-commonjs",
-      "build:proto": "proto-loader-gen-types --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=src/methods/memorize proto3/*.proto"
+      "build:proto": "proto-loader-gen-types --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=src/methods/memorize proto3/*.proto",
+      "loadMovie": "ts-node src/movies/index.ts"
    },
    "author": "",
    "license": "ISC",

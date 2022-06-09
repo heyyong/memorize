@@ -33,10 +33,17 @@ export default class MemorizeEnen extends Component<{}, IMemorizeEnenState> {
         const response = await api.getNextWord({ planId: this.state.planId, spell: this.state.voc?.voc });
         const { offset, total } = response;
         this.setState({ voc: response.word || null, progress: Math.floor((offset! / total!) * 100) });
+        if (!response.word) {
+            this.setState({ planId: 0 });
+        }
     }
 
     public onVocApprove = async (spell: string) => {
         await api.markWord({ planId: this.state.planId, word: spell, status: MarkWordRequest_MemorizedStatus.Approvad });
+    }
+
+    public triggerSync = async () => {
+        await api.triggerWordSync({ cla: ['cet4'], offset: 0, limit: 5000 });
     }
 
 
@@ -70,7 +77,14 @@ export default class MemorizeEnen extends Component<{}, IMemorizeEnenState> {
             )
         } else {
             content = (
-                <Button onClick={this.onStart}>Start Memorizing</Button>
+                <ol>
+                    <li>
+                        <Button onClick={this.onStart}>Start Memorizing</Button>
+                    </li>
+                    <li>
+                        <Button onClick={this.triggerSync}>Sync</Button>
+                    </li>
+                </ol>
             );
         }
 

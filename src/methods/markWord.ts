@@ -44,6 +44,7 @@ async function mark(r: MarkWordRequest): Promise<MarkWordResponse> {
         }
     } else {
         rec.count = 0;
+        rec.err_count++;
     }
 
     await planReg.save(plan);

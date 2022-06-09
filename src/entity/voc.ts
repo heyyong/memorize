@@ -163,6 +163,9 @@ export class MemorizedRecord {
     @Column({ default: 0 })
     public count: number;
 
+    @Column({ default: 0 })
+    public err_count: number;
+
     @Index()
     @Column()
     public memorized_plan_id: number;

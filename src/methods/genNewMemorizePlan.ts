@@ -5,6 +5,7 @@ import { GenNewMemorizePlanResponse } from "./memorize/GenNewMemorizePlanRespons
 import { AppDataSource } from "@/data-source";
 import { Between } from "typeorm";
 import pino from '@/logger';
+import { asyncToDB } from './triggerWordSync';
 
 const logger = pino.child({ module: 'genNewMemorizePlan' });
 
@@ -16,6 +17,7 @@ export const genNewMemorizePlan: MemorizeServiceHandlers['GenNewMemorizePlan'] =
 }
 
 async function newMemorizePlan(r: GenNewMemorizePlanRequest): Promise<GenNewMemorizePlanResponse> {
+
     const planReg = AppDataSource.getRepository(MemorizedPlan);
     const vocReg = AppDataSource.getRepository(Voc);
 
@@ -33,7 +35,7 @@ async function newMemorizePlan(r: GenNewMemorizePlanRequest): Promise<GenNewMemo
     const lPlans = await planReg.find({ where: { finished: true }, order: { created: 'DESC' } })
     const lPlan = lPlans[0];
     if (lPlan) {
-        start = lPlan.id;
+        start = lPlan.to;
     }
     end = start + count;
     logger.info(`[newMemorizePlan] start=${start}, end=${end}`);

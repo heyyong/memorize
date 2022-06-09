@@ -1,7 +1,7 @@
 # Memorize
 
 ## TODO:
-* [ ] Fix the meaning of the vocabularies clawing.
+* [x] Fix the meaning of the vocabularies clawing.
 * [x] Fix auto play audio when showing new word.
 * [ ] Add bottom margin to operation buttons
 * [ ] Give a congratulation view when finishing memorizing

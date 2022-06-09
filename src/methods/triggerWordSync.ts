@@ -21,7 +21,7 @@ export const triggerWordSync: MemorizeServiceHandlers['TriggerWordSync'] = (call
     })
 }
 
-async function asyncToDB(r: TriggerWordSyncRequest): Promise<TriggerWordSyncResponse> {
+export async function asyncToDB(r: TriggerWordSyncRequest): Promise<TriggerWordSyncResponse> {
     try {
         const taskReg = AppDataSource.getRepository(Task);
         const tasks = await taskReg.find({ where: { finished: false } });
@@ -62,7 +62,7 @@ async function asyncToDB(r: TriggerWordSyncRequest): Promise<TriggerWordSyncResp
     }
 }
 
-const sync = throttle(async function sync(task: Task, cla: string, spell: string, headwordEntries: HeadwordEntry[]): Promise<void> {
+async function sync(task: Task, cla: string, spell: string, headwordEntries: HeadwordEntry[]): Promise<void> {
     logger.info(`[sync]{${spell}}:async start`)
     const vocReg = AppDataSource.getRepository(Voc);
 
@@ -79,24 +79,27 @@ const sync = throttle(async function sync(task: Task, cla: string, spell: string
     }
     logger.info(`[sync]{${spell}}:voc check finished`)
 
-    let headwordEntry = headwordEntries.find(({ word }) => word === spell);
-    if (!headwordEntries) throw new Error('can not find word ' + spell)
+    headwordEntries = headwordEntries.filter(({ word }) => word === spell);
+    if (!headwordEntries.length) throw new Error('can not find word ' + spell)
 
     // save pronunciation
     logger.info(`[sync]{${spell}}:pronunciation check`)
     {
         let pronunciations: PronunciationsList = [];
-        if (headwordEntry.pronunciations) {
-            pronunciations = headwordEntry.pronunciations;
-        } else {
-            for (const lexEntry of headwordEntry.lexicalEntries) {
-                for (const entry of lexEntry.entries) {
-                    if (entry.pronunciations) {
-                        pronunciations = entry.pronunciations
+        for (const entry of headwordEntries) {
+            if (entry.pronunciations) {
+                pronunciations = pronunciations.concat(entry.pronunciations);
+            } else {
+                for (const lexEntry of entry.lexicalEntries) {
+                    for (const entry of lexEntry.entries) {
+                        if (entry.pronunciations) {
+                            pronunciations = pronunciations.concat(entry.pronunciations)
+                        }
                     }
                 }
             }
         }
+
         const p = pronunciations.find(({ audioFile }) => audioFile !== undefined);
         if (!p) throw new Error("pron don't exit " + spell);
 
@@ -114,64 +117,66 @@ const sync = throttle(async function sync(task: Task, cla: string, spell: string
         }
     }
 
+    for (const entry of headwordEntries) {
+        logger.info(`[sync]{${spell}}:property check`)
+        const { lexicalEntries } = entry;
+        for (const lexEntry of lexicalEntries) {
+            const { lexicalCategory } = lexEntry;
+            let property = new Property();
+            property.voc = spell;
+            property.prop = lexicalCategory.id;
+            const propReg = AppDataSource.getRepository(Property);
+            const props = await propReg.find({ where: { voc: spell, prop: property.prop } });
+            if (props.length > 0) {
+                property = props[0]
+                logger.info(`[sync]{${spell}}:prop skip`)
+            } else {
+                property = await propReg.save(property);
+                logger.info(`[sync]{${spell}}:property_${property.prop} save success`);
+            }
 
-    logger.info(`[sync]{${spell}}:property check`)
-    const { lexicalEntries } = headwordEntry;
-    for (const lexEntry of lexicalEntries) {
-        const { lexicalCategory } = lexEntry;
-        let property = new Property();
-        property.voc = spell;
-        property.prop = lexicalCategory.id;
-        const propReg = AppDataSource.getRepository(Property);
-        const props = await propReg.find({ where: { voc: spell } });
-        if (props.length > 0) {
-            property = props[0]
-            logger.info(`[sync]{${spell}}:prop skip`)
-        } else {
-            property = await propReg.save(property);
-            logger.info(`[sync]{${spell}}:property_${property.prop} save success`);
-        }
+            const { entries } = lexEntry;
+            for (const entry of entries) {
+                const { senses = [] } = entry;
 
-        const { entries } = lexEntry;
-        for (const entry of entries) {
-            const { senses = [] } = entry;
+                for (const sense of senses) {
+                    const { definitions = [], examples = [] } = sense;
 
-            for (const sense of senses) {
-                const { definitions = [], examples = [] } = sense;
+                    let mean = new Meaning();
+                    mean.voc = spell;
+                    mean.content = definitions[0];
+                    mean.propId = property.id;
 
-                let mean = new Meaning();
-                mean.voc = spell;
-                mean.content = definitions[0];
-                mean.propId = property.id;
-
-                const meanReg = AppDataSource.getRepository(Meaning);
-                let meanFound = await meanReg.find({ where: { voc: spell, propId: property.id, content: mean.content } })
-                if (meanFound.length > 0) {
-                    mean = meanFound[0]
-                    logger.info(`[sync]{${spell}}:meaning ${mean.content} skip`);
-                } else {
-                    mean = await meanReg.save(mean)
-                    logger.info(`[sync]{${spell}}:meaning save success ${mean.id}`);
-                }
-
-                const exReg = AppDataSource.getRepository(Example);
-                for (const example of examples) {
-                    let e = new Example();
-                    e.voc = spell;
-                    e.meanId = mean.id
-                    e.example = example.text
-
-                    const exCount = await exReg.count({ where: { voc: spell, meanId: mean.id, example: e.example } });
-                    logger.info(`[sync]{${spell}}:example check mean.id ${mean.id}, count ${exCount}`)
-                    if (exCount > 0) {
-                        logger.info(`[sync]{${spell}}:example ${e.example} skip`)
+                    const meanReg = AppDataSource.getRepository(Meaning);
+                    let meanFound = await meanReg.find({ where: { voc: spell, propId: property.id, content: mean.content } })
+                    if (meanFound.length > 0) {
+                        mean = meanFound[0]
+                        logger.info(`[sync]{${spell}}:meaning ${mean.content} skip`);
                     } else {
-                        logger.info(`[sync]{${spell}}:example start to save ${JSON.stringify(e)}`);
-                        e = await exReg.save(e)
-                        logger.info(`[sync]{${spell}}:example ${e.example} save success`)
+                        mean = await meanReg.save(mean)
+                        logger.info(`[sync]{${spell}}:meaning save success ${mean.id}`);
+                    }
+
+                    const exReg = AppDataSource.getRepository(Example);
+                    for (const example of examples) {
+                        let e = new Example();
+                        e.voc = spell;
+                        e.meanId = mean.id
+                        e.example = example.text
+
+                        const exCount = await exReg.count({ where: { voc: spell, meanId: mean.id, example: e.example } });
+                        logger.info(`[sync]{${spell}}:example check mean.id ${mean.id}, count ${exCount}`)
+                        if (exCount > 0) {
+                            logger.info(`[sync]{${spell}}:example ${e.example} skip`)
+                        } else {
+                            logger.info(`[sync]{${spell}}:example start to save ${JSON.stringify(e)}`);
+                            e = await exReg.save(e)
+                            logger.info(`[sync]{${spell}}:example ${e.example} save success`)
+                        }
                     }
                 }
             }
         }
     }
-}, 1000)
+
+}

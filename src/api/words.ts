@@ -181,7 +181,7 @@ type DomainClassesList = InlineModel11[];
 type CrossReferencesList = InlineModel6[];
 export type PronunciationsList = InlineModel1[];
 
-export const getWord = taskQueue(5, 60, async function getWord(lang: string, word: string): Promise<RetrieveEntry> {
+export const getWord = taskQueue(5, 50, async function getWord(lang: string, word: string): Promise<RetrieveEntry> {
     try {
         console.log(`start to request getWord(${lang}, ${word})`)
         const { data } = await get(`/api/v2/words/${lang}?q=${word}`);
