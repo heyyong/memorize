@@ -43,7 +43,7 @@ export default class MemorizeEnen extends Component<{}, IMemorizeEnenState> {
     }
 
     public triggerSync = async () => {
-        await api.triggerWordSync({ cla: ['cet4'], offset: 0, limit: 5000 });
+        await api.triggerWordSync({ cla: ['cet6'], offset: 0, limit: 10000 });
     }
 
 
