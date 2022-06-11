@@ -6,7 +6,7 @@ import type { Property as _Property, Property__Output as _Property__Output } fro
 export interface Word {
   'id'?: (number);
   'voc'?: (string);
-  'cla'?: (string);
+  'cla'?: (string)[];
   'pron'?: (_Pron | null);
   'properties'?: (_Property)[];
 }
@@ -14,7 +14,7 @@ export interface Word {
 export interface Word__Output {
   'id': (number);
   'voc': (string);
-  'cla': (string);
+  'cla': (string)[];
   'pron': (_Pron__Output | null);
   'properties': (_Property__Output)[];
 }

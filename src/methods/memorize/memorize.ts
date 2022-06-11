@@ -11,6 +11,8 @@ export interface ProtoGrpcType {
   Example: MessageTypeDefinition
   GenNewMemorizePlanRequest: MessageTypeDefinition
   GenNewMemorizePlanResponse: MessageTypeDefinition
+  GetClaListRequest: MessageTypeDefinition
+  GetClaListResponse: MessageTypeDefinition
   GetNextWordRequest: MessageTypeDefinition
   GetNextWordResponse: MessageTypeDefinition
   GetWordListRequest: MessageTypeDefinition
@@ -23,6 +25,9 @@ export interface ProtoGrpcType {
   Property: MessageTypeDefinition
   TriggerWordSyncRequest: MessageTypeDefinition
   TriggerWordSyncResponse: MessageTypeDefinition
+  UploadWordCollectionRequest: MessageTypeDefinition
+  UploadWordCollectionResponse: MessageTypeDefinition
+  VocCla: MessageTypeDefinition
   Word: MessageTypeDefinition
 }
 

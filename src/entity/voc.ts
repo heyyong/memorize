@@ -10,10 +10,8 @@ export class Voc {
     public voc: string;
 
     @Index()
-    @Column({
-        default: 'default'
-    })
-    public cla: string;
+    @Column('simple-array')
+    public cla: string[];
 
     @CreateDateColumn()
     public created: number;

@@ -3,7 +3,7 @@ syntax="proto3";
 message Word {
      int32 id = 1;
      string voc = 2;
-     string cla = 3;
+     repeated string cla = 3;
 
      Pron pron = 20;
     repeated Property properties = 50;
@@ -34,6 +34,11 @@ message Example {
      string example = 2;
 }
 
+message VocCla {
+     string voc = 1;
+     string cla = 2;
+}
+
 service MemorizeService {
     rpc GenNewMemorizePlan(GenNewMemorizePlanRequest) returns (GenNewMemorizePlanResponse);
     rpc MarkWord(MarkWordRequest) returns (MarkWordResponse);
@@ -41,12 +46,28 @@ service MemorizeService {
 
     rpc GetWordList (GetWordListRequest) returns (GetWordListResponse);
     rpc TriggerWordSync (TriggerWordSyncRequest) returns (TriggerWordSyncResponse);
+    rpc UploadWordCollection (UploadWordCollectionRequest) returns (UploadWordCollectionResponse);
+    rpc GetClaList (GetClaListRequest) returns (GetClaListResponse);
+}
+
+message GetClaListRequest {
+
+}
+
+message GetClaListResponse {
+     repeated string cla = 1;
+}
+
+message UploadWordCollectionRequest {
+     repeated VocCla vocList = 1;
+}
+
+message UploadWordCollectionResponse {
+     repeated string failedWords = 1;
 }
 
 message TriggerWordSyncRequest {
-    repeated string cla = 1;
-    optional int32 offset = 2;
-    optional int32 limit = 3;
+    optional string cla = 1;
 }
 
 message TriggerWordSyncResponse { 

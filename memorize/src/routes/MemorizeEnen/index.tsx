@@ -1,6 +1,7 @@
 import { Component, h } from 'preact';
 import Button from '@mui/material/Button';
 import LinearProgress from '@mui/material/LinearProgress';
+import TextField from '@mui/material/TextField';
 
 import { default as Enen } from '../../components/Enen';
 import { api } from '../../api';
@@ -11,6 +12,9 @@ interface IMemorizeEnenState {
     planId: number;
     voc: Word | null;
     progress: undefined | number;
+
+    claList: string[];
+    words: string,
 }
 
 export default class MemorizeEnen extends Component<{}, IMemorizeEnenState> {
@@ -18,6 +22,9 @@ export default class MemorizeEnen extends Component<{}, IMemorizeEnenState> {
         planId: 0,
         voc: null,
         progress: undefined,
+
+        claList: [],
+        words: '',
     }
 
     public genMemorizePlan = async () => {
@@ -25,8 +32,15 @@ export default class MemorizeEnen extends Component<{}, IMemorizeEnenState> {
         this.setState({ planId: response.planId });
     }
 
+    public getClaList = async (): Promise<void> => {
+        const response = await api.getClaList({});
+
+        this.setState({ claList: response.cla });
+    }
+
     public componentDidMount() {
         this.genMemorizePlan()
+        this.getClaList()
     }
 
     public nextWord = async () => {
@@ -42,8 +56,8 @@ export default class MemorizeEnen extends Component<{}, IMemorizeEnenState> {
         await api.markWord({ planId: this.state.planId, word: spell, status: MarkWordRequest_MemorizedStatus.Approvad });
     }
 
-    public triggerSync = async () => {
-        await api.triggerWordSync({ cla: ['cet6'], offset: 0, limit: 10000 });
+    public triggerSync = async (cla: string) => {
+        await api.triggerWordSync({ cla });
     }
 
 
@@ -77,14 +91,22 @@ export default class MemorizeEnen extends Component<{}, IMemorizeEnenState> {
             )
         } else {
             content = (
-                <ol>
-                    <li>
+                <div>
+                    <div>
                         <Button onClick={this.onStart}>Start Memorizing</Button>
-                    </li>
-                    <li>
-                        <Button onClick={this.triggerSync}>Sync</Button>
-                    </li>
-                </ol>
+                    </div>
+                    <hr />
+                    <div>
+                        Sync
+                        <ul>
+                            {this.renderSync()}
+                        </ul>
+                    </div>
+                    <div>
+                        Upload
+                        {this.renderUpload()}
+                    </div>
+                </div>
             );
         }
 
@@ -93,5 +115,66 @@ export default class MemorizeEnen extends Component<{}, IMemorizeEnenState> {
                 {content}
             </div>
         )
+    }
+
+    public renderUpload = () => {
+        return (
+            <div>
+                <Button onClick={this.uploadWords}>Upload</Button>
+                <div>
+                    <TextField
+                        id="standard-multiline-flexible"
+                        label="Upload"
+                        multiline
+                        maxRows={10000}
+                        value={this.state.words}
+                        onChange={this.onWordChanges}
+                        variant="standard"
+                    />
+                </div>
+            </div>
+        )
+    }
+
+    public uploadWords = async () => {
+        const words = this.state.words;
+        if (!words) {
+            console.error('no words');
+            return;
+        }
+        const lines = words.split(/\n+/);
+        let cla = lines[0];
+        if (!/^cla:[\w\d]+$/.test(cla)) {
+            console.error('wrong cla');
+            return;
+        }
+        cla = cla.slice(4).trim();
+
+
+        const uploads: { voc: string, cla: string }[] = [];
+        for (const line of lines.slice(1)) {
+            if (!/^[\w'\-]+$/.test(line)) {
+                console.error(`check ${line}`);
+                return;
+            }
+
+            const word = line.trim();
+            uploads.push({
+                voc: word,
+                cla: cla,
+            });
+        }
+
+        await api.uploadWordCollection({ vocList: uploads });
+    }
+
+    public onWordChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({ words: e.target.value });
+    }
+
+    public renderSync = () => {
+        return this.state.claList.map(cla => {
+            return <li><Button onClick={() => this.triggerSync(cla)}>{cla}</Button></li>
+        });
     }
 }

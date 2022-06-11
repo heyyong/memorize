@@ -1,5 +1,4 @@
 /* eslint-disable */
-// @ts-ignore
 import * as Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { CallContext, CallOptions } from "nice-grpc-common";
@@ -9,7 +8,7 @@ export const protobufPackage = "";
 export interface Word {
   id: number;
   voc: string;
-  cla: string;
+  cla: string[];
   pron: Pron | undefined;
   properties: Property[];
 }
@@ -37,10 +36,27 @@ export interface Example {
   example: string;
 }
 
-export interface TriggerWordSyncRequest {
+export interface VocCla {
+  voc: string;
+  cla: string;
+}
+
+export interface GetClaListRequest {}
+
+export interface GetClaListResponse {
   cla: string[];
-  offset?: number | undefined;
-  limit?: number | undefined;
+}
+
+export interface UploadWordCollectionRequest {
+  vocList: VocCla[];
+}
+
+export interface UploadWordCollectionResponse {
+  failedWords: string[];
+}
+
+export interface TriggerWordSyncRequest {
+  cla?: string | undefined;
 }
 
 export interface TriggerWordSyncResponse {
@@ -95,7 +111,7 @@ export interface GetWordListResponse {
 }
 
 function createBaseWord(): Word {
-  return { id: 0, voc: "", cla: "", pron: undefined, properties: [] };
+  return { id: 0, voc: "", cla: [], pron: undefined, properties: [] };
 }
 
 export const Word = {
@@ -106,8 +122,8 @@ export const Word = {
     if (message.voc !== "") {
       writer.uint32(18).string(message.voc);
     }
-    if (message.cla !== "") {
-      writer.uint32(26).string(message.cla);
+    for (const v of message.cla) {
+      writer.uint32(26).string(v!);
     }
     if (message.pron !== undefined) {
       Pron.encode(message.pron, writer.uint32(162).fork()).ldelim();
@@ -132,7 +148,7 @@ export const Word = {
           message.voc = reader.string();
           break;
         case 3:
-          message.cla = reader.string();
+          message.cla.push(reader.string());
           break;
         case 20:
           message.pron = Pron.decode(reader, reader.uint32());
@@ -152,7 +168,7 @@ export const Word = {
     const message = createBaseWord();
     message.id = object.id ?? 0;
     message.voc = object.voc ?? "";
-    message.cla = object.cla ?? "";
+    message.cla = object.cla?.map((e) => e) || [];
     message.pron =
       object.pron !== undefined && object.pron !== null
         ? Pron.fromPartial(object.pron)
@@ -371,8 +387,218 @@ export const Example = {
   },
 };
 
+function createBaseVocCla(): VocCla {
+  return { voc: "", cla: "" };
+}
+
+export const VocCla = {
+  encode(
+    message: VocCla,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.voc !== "") {
+      writer.uint32(10).string(message.voc);
+    }
+    if (message.cla !== "") {
+      writer.uint32(18).string(message.cla);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): VocCla {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseVocCla();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.voc = reader.string();
+          break;
+        case 2:
+          message.cla = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromPartial(object: DeepPartial<VocCla>): VocCla {
+    const message = createBaseVocCla();
+    message.voc = object.voc ?? "";
+    message.cla = object.cla ?? "";
+    return message;
+  },
+};
+
+function createBaseGetClaListRequest(): GetClaListRequest {
+  return {};
+}
+
+export const GetClaListRequest = {
+  encode(
+    _: GetClaListRequest,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetClaListRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetClaListRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromPartial(_: DeepPartial<GetClaListRequest>): GetClaListRequest {
+    const message = createBaseGetClaListRequest();
+    return message;
+  },
+};
+
+function createBaseGetClaListResponse(): GetClaListResponse {
+  return { cla: [] };
+}
+
+export const GetClaListResponse = {
+  encode(
+    message: GetClaListResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    for (const v of message.cla) {
+      writer.uint32(10).string(v!);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetClaListResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetClaListResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.cla.push(reader.string());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromPartial(object: DeepPartial<GetClaListResponse>): GetClaListResponse {
+    const message = createBaseGetClaListResponse();
+    message.cla = object.cla?.map((e) => e) || [];
+    return message;
+  },
+};
+
+function createBaseUploadWordCollectionRequest(): UploadWordCollectionRequest {
+  return { vocList: [] };
+}
+
+export const UploadWordCollectionRequest = {
+  encode(
+    message: UploadWordCollectionRequest,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    for (const v of message.vocList) {
+      VocCla.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): UploadWordCollectionRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUploadWordCollectionRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.vocList.push(VocCla.decode(reader, reader.uint32()));
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromPartial(
+    object: DeepPartial<UploadWordCollectionRequest>
+  ): UploadWordCollectionRequest {
+    const message = createBaseUploadWordCollectionRequest();
+    message.vocList = object.vocList?.map((e) => VocCla.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseUploadWordCollectionResponse(): UploadWordCollectionResponse {
+  return { failedWords: [] };
+}
+
+export const UploadWordCollectionResponse = {
+  encode(
+    message: UploadWordCollectionResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    for (const v of message.failedWords) {
+      writer.uint32(10).string(v!);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): UploadWordCollectionResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUploadWordCollectionResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.failedWords.push(reader.string());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromPartial(
+    object: DeepPartial<UploadWordCollectionResponse>
+  ): UploadWordCollectionResponse {
+    const message = createBaseUploadWordCollectionResponse();
+    message.failedWords = object.failedWords?.map((e) => e) || [];
+    return message;
+  },
+};
+
 function createBaseTriggerWordSyncRequest(): TriggerWordSyncRequest {
-  return { cla: [], offset: undefined, limit: undefined };
+  return { cla: undefined };
 }
 
 export const TriggerWordSyncRequest = {
@@ -380,14 +606,8 @@ export const TriggerWordSyncRequest = {
     message: TriggerWordSyncRequest,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    for (const v of message.cla) {
-      writer.uint32(10).string(v!);
-    }
-    if (message.offset !== undefined) {
-      writer.uint32(16).int32(message.offset);
-    }
-    if (message.limit !== undefined) {
-      writer.uint32(24).int32(message.limit);
+    if (message.cla !== undefined) {
+      writer.uint32(10).string(message.cla);
     }
     return writer;
   },
@@ -403,13 +623,7 @@ export const TriggerWordSyncRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.cla.push(reader.string());
-          break;
-        case 2:
-          message.offset = reader.int32();
-          break;
-        case 3:
-          message.limit = reader.int32();
+          message.cla = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -423,9 +637,7 @@ export const TriggerWordSyncRequest = {
     object: DeepPartial<TriggerWordSyncRequest>
   ): TriggerWordSyncRequest {
     const message = createBaseTriggerWordSyncRequest();
-    message.cla = object.cla?.map((e) => e) || [];
-    message.offset = object.offset ?? undefined;
-    message.limit = object.limit ?? undefined;
+    message.cla = object.cla ?? undefined;
     return message;
   },
 };
@@ -916,6 +1128,22 @@ export const MemorizeServiceDefinition = {
       responseStream: false,
       options: {},
     },
+    uploadWordCollection: {
+      name: "UploadWordCollection",
+      requestType: UploadWordCollectionRequest,
+      requestStream: false,
+      responseType: UploadWordCollectionResponse,
+      responseStream: false,
+      options: {},
+    },
+    getClaList: {
+      name: "GetClaList",
+      requestType: GetClaListRequest,
+      requestStream: false,
+      responseType: GetClaListResponse,
+      responseStream: false,
+      options: {},
+    },
   },
 } as const;
 
@@ -940,6 +1168,14 @@ export interface MemorizeServiceServiceImplementation<CallContextExt = {}> {
     request: TriggerWordSyncRequest,
     context: CallContext & CallContextExt
   ): Promise<DeepPartial<TriggerWordSyncResponse>>;
+  uploadWordCollection(
+    request: UploadWordCollectionRequest,
+    context: CallContext & CallContextExt
+  ): Promise<DeepPartial<UploadWordCollectionResponse>>;
+  getClaList(
+    request: GetClaListRequest,
+    context: CallContext & CallContextExt
+  ): Promise<DeepPartial<GetClaListResponse>>;
 }
 
 export interface MemorizeServiceClient<CallOptionsExt = {}> {
@@ -963,6 +1199,14 @@ export interface MemorizeServiceClient<CallOptionsExt = {}> {
     request: DeepPartial<TriggerWordSyncRequest>,
     options?: CallOptions & CallOptionsExt
   ): Promise<TriggerWordSyncResponse>;
+  uploadWordCollection(
+    request: DeepPartial<UploadWordCollectionRequest>,
+    options?: CallOptions & CallOptionsExt
+  ): Promise<UploadWordCollectionResponse>;
+  getClaList(
+    request: DeepPartial<GetClaListRequest>,
+    options?: CallOptions & CallOptionsExt
+  ): Promise<GetClaListResponse>;
 }
 
 type Builtin =
