@@ -28,7 +28,7 @@ export default class MemorizeEnen extends Component<{}, IMemorizeEnenState> {
     }
 
     public genMemorizePlan = async () => {
-        const response = await api.genNewMemorizePlan({ count: 100 });
+        const response = await api.genNewMemorizePlan({ count: 50 });
         this.setState({ planId: response.planId });
     }
 
