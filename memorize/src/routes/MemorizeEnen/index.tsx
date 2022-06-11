@@ -102,6 +102,7 @@ export default class MemorizeEnen extends Component<{}, IMemorizeEnenState> {
                             {this.renderSync()}
                         </ul>
                     </div>
+                    <hr />
                     <div>
                         Upload
                         {this.renderUpload()}

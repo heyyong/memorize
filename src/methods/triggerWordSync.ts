@@ -6,7 +6,7 @@ import { Voc, Property, Pronunciation, Meaning, Example } from '@/entity/voc';
 import { AppDataSource } from '@/data-source';
 import { getWord, PronunciationsList, HeadwordEntry } from '@/api/words';
 import { Task } from '@/entity/task';
-import { Like } from 'typeorm';
+import { In, Like } from 'typeorm';
 
 const logger = pino.child({ module: 'triggerWordSync' });
 
@@ -29,7 +29,10 @@ export async function asyncToDB(r: TriggerWordSyncRequest): Promise<TriggerWordS
         }
 
         const vocReg = AppDataSource.getRepository(Voc)
-        const words = await vocReg.findBy({ cla: Like(r.cla) });
+        const words = await vocReg.findBy({
+            cla: Like(r.cla || ''),
+            voc: r.words === undefined ? undefined : In(r.words)
+        });
 
         let task = new Task();
         task.claList = [r.cla];

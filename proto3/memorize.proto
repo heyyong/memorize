@@ -68,6 +68,7 @@ message UploadWordCollectionResponse {
 
 message TriggerWordSyncRequest {
     optional string cla = 1;
+    repeated string words = 2;
 }
 
 message TriggerWordSyncResponse { 
