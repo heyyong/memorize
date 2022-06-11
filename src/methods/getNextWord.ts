@@ -47,10 +47,10 @@ async function nextWord(r: GetNextWordRequest): Promise<GetNextWordResponse> {
             if (nextW === spell) {
                 continue;
             }
+            logger.info(`[nextWord] spell=${nextW}, nextW=${nextW}`);
             break;
         }
 
-        logger.info(`[nextWord] nextW=${nextW}`);
 
         const mVoc = await vocReg.findOne({ where: { voc: nextW } });
         const voc = await composeWords([mVoc]);

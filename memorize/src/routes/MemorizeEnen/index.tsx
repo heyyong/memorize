@@ -153,6 +153,7 @@ export default class MemorizeEnen extends Component<{}, IMemorizeEnenState> {
 
         const uploads: { voc: string, cla: string }[] = [];
         for (const line of lines.slice(1)) {
+            if (!line.trim()) continue;
             if (!/^[\w'\-]+$/.test(line)) {
                 console.error(`check ${line}`);
                 return;
