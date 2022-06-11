@@ -14,7 +14,8 @@ interface IMemorizeEnenState {
     progress: undefined | number;
 
     claList: string[];
-    words: string,
+    words: string;
+    syncs: string;
 }
 
 export default class MemorizeEnen extends Component<{}, IMemorizeEnenState> {
@@ -25,6 +26,7 @@ export default class MemorizeEnen extends Component<{}, IMemorizeEnenState> {
 
         claList: [],
         words: '',
+        syncs: ''
     }
 
     public genMemorizePlan = async () => {
@@ -56,8 +58,8 @@ export default class MemorizeEnen extends Component<{}, IMemorizeEnenState> {
         await api.markWord({ planId: this.state.planId, word: spell, status: MarkWordRequest_MemorizedStatus.Approvad });
     }
 
-    public triggerSync = async (cla: string) => {
-        await api.triggerWordSync({ cla });
+    public triggerSync = async (cla?: string, words?: string[]) => {
+        await api.triggerWordSync({ cla, words });
     }
 
 
@@ -98,6 +100,9 @@ export default class MemorizeEnen extends Component<{}, IMemorizeEnenState> {
                     <hr />
                     <div>
                         Sync
+                        <div>
+                            {this.renderSyncWords()}
+                        </div>
                         <ul>
                             {this.renderSync()}
                         </ul>
@@ -124,7 +129,6 @@ export default class MemorizeEnen extends Component<{}, IMemorizeEnenState> {
                 <Button onClick={this.uploadWords}>Upload</Button>
                 <div>
                     <TextField
-                        id="standard-multiline-flexible"
                         label="Upload"
                         multiline
                         maxRows={10000}
@@ -178,5 +182,35 @@ export default class MemorizeEnen extends Component<{}, IMemorizeEnenState> {
         return this.state.claList.map(cla => {
             return <li><Button onClick={() => this.triggerSync(cla)}>{cla}</Button></li>
         });
+    }
+
+    public renderSyncWords = () => {
+        return (
+            <div>
+                <TextField
+                    label="sync"
+                    multiline
+                    maxRows={10000}
+                    value={this.state.syncs}
+                    onChange={(e) => this.setState({ syncs: e.target.value })}
+                    variant="standard"
+                />
+                <div>
+                    <Button onClick={this.syncWords}>Trigger</Button>
+                </div>
+            </div>
+        )
+    }
+
+    public syncWords = async () => {
+        const { syncs } = this.state;
+        let words: string[] | undefined = undefined;
+        if (syncs.trim() !== '') {
+            words = syncs
+                .split(/\n/)
+                .map(w => w.trim())
+                .filter(w => Boolean(w))
+        }
+        this.triggerSync(undefined, words);
     }
 }

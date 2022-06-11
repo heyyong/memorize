@@ -57,6 +57,7 @@ export interface UploadWordCollectionResponse {
 
 export interface TriggerWordSyncRequest {
   cla?: string | undefined;
+  words: string[];
 }
 
 export interface TriggerWordSyncResponse {
@@ -598,7 +599,7 @@ export const UploadWordCollectionResponse = {
 };
 
 function createBaseTriggerWordSyncRequest(): TriggerWordSyncRequest {
-  return { cla: undefined };
+  return { cla: undefined, words: [] };
 }
 
 export const TriggerWordSyncRequest = {
@@ -608,6 +609,9 @@ export const TriggerWordSyncRequest = {
   ): _m0.Writer {
     if (message.cla !== undefined) {
       writer.uint32(10).string(message.cla);
+    }
+    for (const v of message.words) {
+      writer.uint32(18).string(v!);
     }
     return writer;
   },
@@ -625,6 +629,9 @@ export const TriggerWordSyncRequest = {
         case 1:
           message.cla = reader.string();
           break;
+        case 2:
+          message.words.push(reader.string());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -638,6 +645,7 @@ export const TriggerWordSyncRequest = {
   ): TriggerWordSyncRequest {
     const message = createBaseTriggerWordSyncRequest();
     message.cla = object.cla ?? undefined;
+    message.words = object.words?.map((e) => e) || [];
     return message;
   },
 };
