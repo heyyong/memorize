@@ -12,6 +12,10 @@ export class Voc {
 
     @Index()
     @Column()
+    public originDict: string;
+
+    @Index()
+    @Column()
     public sync: boolean;
 
     @CreateDateColumn()
