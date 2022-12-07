@@ -1,10 +1,8 @@
+import { TableBase } from "@/entity/base";
 import { Column, CreateDateColumn, Entity, Index, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
-export class User {
-    @PrimaryGeneratedColumn('uuid')
-    public id: string;
-
+export class MUser extends TableBase {
     @Index()
     @Column()
     public username: string;
@@ -12,10 +10,4 @@ export class User {
     @Index()
     @Column()
     public token: string;
-
-    @CreateDateColumn()
-    public created: number;
-
-    @UpdateDateColumn()
-    public updated: number;
 }

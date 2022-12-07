@@ -1,10 +1,9 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
 
-import { User } from '@/entity/user';
-import { VocSet, VocSetToVoc } from "@/entity/wordSet";
-import { Voc, Property, Meaning, Pronunciation, Example, } from '@/entity/vocabularies';
-import { DailyWordList, MemoDailyWordRecordDetail } from "@/entity/memoRecords";
+import { MUser } from '@/entity/user';
+import { MVocSet, MVocSetToVoc } from "@/entity/wordSet";
+import { MDailyWordList, MMemoDailyWordRecordDetail } from "@/entity/memoRecords";
 
 export const AppDataSource = new DataSource({
     type: 'sqlite',
@@ -14,16 +13,15 @@ export const AppDataSource = new DataSource({
     logging: false,
     entities: [
         // User
-        User,
+        MUser,
 
         // Vocabularies
-        Voc, Property, Meaning, Pronunciation, Example,
 
         // VocSet
-        VocSet, VocSetToVoc,
+        MVocSet, MVocSetToVoc,
 
         // memoRecords
-        DailyWordList, MemoDailyWordRecordDetail,
+        MDailyWordList, MMemoDailyWordRecordDetail,
     ],
     migrations: [],
     subscribers: [],

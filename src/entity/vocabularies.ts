@@ -1,3 +1,4 @@
+import { TableBase } from "@/entity/base";
 import { Column, CreateDateColumn, Entity, Index, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 // export enum Level {
@@ -28,10 +29,7 @@ export enum PartOfSpeech {
 }
 
 @Entity()
-export class MVocabulary {
-    @PrimaryGeneratedColumn()
-    public id: number;
-
+export class MVocabulary extends TableBase {
     @Index()
     @Column()
     public spelling: string;
@@ -39,21 +37,12 @@ export class MVocabulary {
     @Index()
     @Column()
     public dict: string;
-
-    @CreateDateColumn()
-    public created: number;
-
-    @UpdateDateColumn()
-    public updated: number;
 }
 
 
 
 @Entity()
-export class MPartOfSpeech {
-    @PrimaryGeneratedColumn()
-    public id: number;
-
+export class MPartOfSpeech extends TableBase {
     @Index()
     @Column()
     @ManyToOne(() => MVocabulary, (voc) => voc.id)
@@ -62,19 +51,10 @@ export class MPartOfSpeech {
     @Index()
     @Column()
     public pos: string;
-
-    @CreateDateColumn()
-    public created: number;
-
-    @UpdateDateColumn()
-    public updated: number;
 }
 
 @Entity()
-export class MSense {
-    @PrimaryGeneratedColumn()
-    public id: number;
-
+export class MSense extends TableBase {
     @Index()
     @Column()
     @ManyToOne(() => MPartOfSpeech, (pos) => pos.id)
@@ -87,20 +67,11 @@ export class MSense {
 
     @Index()
     @Column()
-    public sense: string;
-
-    @CreateDateColumn()
-    public created: number;
-
-    @UpdateDateColumn()
-    public updated: number;
+    public title: string;
 }
 
 @Entity()
-export class MPronunciation {
-    @PrimaryGeneratedColumn()
-    public id: number;
-
+export class MPronunciation extends TableBase {
     @Index()
     @Column()
     public ipa: string;
@@ -113,20 +84,11 @@ export class MPronunciation {
     @Index()
     @Column()
     public audio: Buffer;
-
-    @CreateDateColumn()
-    public created: number;
-
-    @UpdateDateColumn()
-    public updated: number;
 }
 
 
 @Entity()
-export class MSenseDefinition {
-    @PrimaryGeneratedColumn()
-    public id: number;
-
+export class MSenseDefinition extends TableBase {
     @Index()
     @Column({ default: null, })
     @ManyToOne(() => MVocabulary, (voc) => voc.id)
@@ -138,19 +100,10 @@ export class MSenseDefinition {
     // @Index()
     // @Column()
     // public level: Level;
-
-    @CreateDateColumn()
-    public created: number;
-
-    @UpdateDateColumn()
-    public updated: number;
 }
 
 @Entity()
-export class MPhrase {
-    @PrimaryGeneratedColumn()
-    public id: number;
-
+export class MPhrase extends TableBase {
     @Index()
     @Column()
     @ManyToOne(() => MSense, (sense) => sense.id)
@@ -159,19 +112,10 @@ export class MPhrase {
     @Index()
     @Column()
     public phrase: string;
-
-    @CreateDateColumn()
-    public created: number;
-
-    @UpdateDateColumn()
-    public updated: number;
 }
 
 @Entity()
-export class MExample {
-    @PrimaryGeneratedColumn()
-    public id: number;
-
+export class MExample extends TableBase {
     @Index()
     @Column()
     @ManyToOne(() => MVocabulary, (voc) => voc.id)
@@ -182,9 +126,7 @@ export class MExample {
     @ManyToOne(() => MSenseDefinition, (def) => def.id)
     public defId: number;
 
-    @CreateDateColumn()
-    public created: number;
-
-    @UpdateDateColumn()
-    public updated: number;
+    @Index()
+    @Column()
+    public example: string;
 }

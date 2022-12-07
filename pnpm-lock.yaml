@@ -8,6 +8,7 @@ specifiers:
   ajv-errors: ^3.0.0
   axios: ^0.27.2
   date-fns: ^2.28.0
+  fast-xml-parser: ^4.0.12
   pino: ^8.0.0
   pino-pretty: ^8.0.0
   reflect-metadata: ^0.1.13
@@ -26,6 +27,7 @@ dependencies:
   ajv-errors: 3.0.0_ajv@7.2.4
   axios: 0.27.2
   date-fns: 2.28.0
+  fast-xml-parser: 4.0.12
   pino: 8.0.0
   pino-pretty: 8.0.0
   reflect-metadata: 0.1.13
@@ -558,6 +560,13 @@ packages:
 
   /fast-safe-stringify/2.1.1:
     resolution: {integrity: sha512-W+KJc2dmILlPplD/H4K9l9LcAHAfPtP6BY84uVLXQ6Evcz9Lcg33Y2z1IVblT6xdY54PXYVHEv+0Wpq8Io6zkA==}
+    dev: false
+
+  /fast-xml-parser/4.0.12:
+    resolution: {integrity: sha512-/Nmo3823Rfx7UTJosQNz6hBVbszfv1Unb7A4iNJZhvCGCgtIHv/uODmrYIH8vc05+XKZ4hNIOv6SlBejvJgATw==}
+    hasBin: true
+    dependencies:
+      strnum: 1.0.5
     dev: false
 
   /follow-redirects/1.15.1:
@@ -1339,6 +1348,10 @@ packages:
   /strip-json-comments/3.1.1:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
+    dev: false
+
+  /strnum/1.0.5:
+    resolution: {integrity: sha512-J8bbNyKKXl5qYcR36TIO8W3mVGVHrmmxsd5PAItGkmyzwJvybiw2IVq5nqd0i4LSNSkB/sx9VHllbfFdr9k1JA==}
     dev: false
 
   /supports-color/5.5.0:

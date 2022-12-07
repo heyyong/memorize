@@ -1,7 +1,7 @@
 import { Column, CreateDateColumn, Entity, Index, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
-export class DailyWordList {
+export class MDailyWordList {
     @PrimaryGeneratedColumn()
     public id: number;
 
@@ -30,7 +30,7 @@ export class DailyWordList {
 }
 
 @Entity()
-export class MemoDailyWordRecordDetail {
+export class MMemoDailyWordRecordDetail {
     @PrimaryGeneratedColumn()
     public id: number;
 

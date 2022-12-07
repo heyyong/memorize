@@ -1,4 +1,6 @@
-import { Column, CreateDateColumn, Entity, Index, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, Index, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { TableBase } from '@/entity/base';
+import { MVocabulary } from "@/entity/vocabularies";
 
 /**
  * This enumerable vairable indicate which
@@ -13,37 +15,21 @@ export enum CLA {
 };
 
 @Entity()
-export class VocSet {
-    @PrimaryGeneratedColumn()
-    public id: number;
-
+export class MVocSet extends TableBase {
     @Column({ unique: true })
     @Index()
     public name: string;
-
-    @CreateDateColumn()
-    public created: number;
-
-    @UpdateDateColumn()
-    public updated: number;
 }
 
 @Entity()
-export class VocSetToVoc {
-    @PrimaryGeneratedColumn()
-    public id: number;
-
+export class MVocSetToVoc extends TableBase {
     @Index()
     @Column()
+    @ManyToOne(() => MVocSet, (vocSet) => vocSet.id)
     public setId: number;
 
     @Index()
     @Column()
+    @ManyToOne(() => MVocabulary, (mVoc) => mVoc.id)
     public vocId: number;
-
-    @CreateDateColumn()
-    public created: number;
-
-    @UpdateDateColumn()
-    public updated: number;
 }
